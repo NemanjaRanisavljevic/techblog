@@ -24,6 +24,7 @@
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.css" rel="stylesheet">
 
+
 <!-- FontAwesome Icons core CSS -->
 <link href="css/font-awesome.min.css" rel="stylesheet">
 
@@ -38,6 +39,7 @@
 
 <!-- Version Tech CSS for this template -->
 <link href="css/version/tech.css" rel="stylesheet">
+
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
