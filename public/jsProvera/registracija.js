@@ -1,5 +1,12 @@
 $(document).ready(function(){
     
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
     $("#btnReg").click(function(){
         
         var ime = $("#imeReg").val();
@@ -67,6 +74,57 @@ $(document).ready(function(){
         {
             $.notify("Morate izabrati vasu sliku!","error");
             greske.push("Greska pol");
+        }
+
+        if(greske == 0)
+        {
+            $.ajax({
+                url:'registracija',
+                type:'POST',
+                data:{
+                    ime:ime,
+                    prezime:prezime,
+                    sifra:sifra,
+                    email:email,
+                    pol:pol,
+                    slika:slika
+                },
+                success:function(data){
+
+                    // $("#ime").val("");
+                    // $("#prezime").val("");
+                    // $("#sifra").val("");
+                    // $("#email").val("");
+                    // $("#ddlPol").val("0");
+                    
+                    $.notify("Uspesno ste se registrovali. Posetite vas email radi aktivacije naloga.","success");
+
+                },
+                error:function(xhr,statusTxt,errors)
+                {
+                    var status=xhr.status;
+                    var greske = xhr.responseJSON.errors;
+
+                    var ispis="<ul>";
+                    $.each(greske,function (greska, value) {
+                        ispis +="<li>"+ value +"</li>";
+
+                    });
+                    ispis +="</ul>";
+                    $('.ispisGresaka').html(ispis);
+
+                    switch(status)
+                    {
+                        case 500:
+                            alert("Greska na serveru.Trenutno niste u mogucnosti da se registrujete");
+                            break;
+                        case 404:
+                            alert("Pogresili ste unos nekog elementa forme");
+
+                            break;
+                    }
+                }
+            });
         }
 
 

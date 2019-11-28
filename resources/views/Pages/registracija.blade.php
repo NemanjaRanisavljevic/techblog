@@ -17,6 +17,7 @@
                             </div>
                             <div class="col-lg-7">
                                 <form class="form-wrapper">
+                                @csrf
                                     <input type="text" class="form-control" id="imeReg" placeholder="Ime">
                                     <!-- <small id="imeAlert" class="form-text">We'll never share your email with anyone else.</small> -->
                                     <div id="notifications"></div>
@@ -25,16 +26,13 @@
                                     
                                     <input type="email" class="form-control" id="emailReg" placeholder="Email">
                                    
-
                                     <input type="password" class="form-control" id="sifraReg" placeholder="Password">
 
                                     <select class="form-control" id="polList">
                                         <option selected value="0">Pol...</option>
-                                       
+                                        <option value="1">Musko</option>
                                     </select>
                                     
-
-
                                     <input type="file" id="slikaKorisnika">
                                     <small id="emailAlert" class="form-text text-muted">Izaberite vasu fotografiju.</small>
                                     

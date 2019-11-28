@@ -40,6 +40,9 @@
 <!-- Version Tech CSS for this template -->
 <link href="css/version/tech.css" rel="stylesheet">
 
+<!-- Ajax  -->
+<meta name="csrf-token" content="{{ csrf_token() }}" />
+
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
