@@ -16,27 +16,29 @@
                                 <p>Tech Blog is a personal blog for handcrafted, cameramade photography content, fashion styles from independent creatives around the world.</p>
                             </div>
                             <div class="col-lg-7">
-                                <form class="form-wrapper">
+                                <form class="form-wrapper" enctype='multipart/form-data' action="{{route("registracija")}}" method="POST" onsubmit="return proveraRegistracije()">
                                 @csrf
-                                    <input type="text" class="form-control" id="imeReg" placeholder="Ime">
+                                    <input type="text" class="form-control" name="imeReg" id="imeReg" placeholder="Ime">
                                     <!-- <small id="imeAlert" class="form-text">We'll never share your email with anyone else.</small> -->
                                     <div id="notifications"></div>
 
-                                    <input type="text" class="form-control" id="prezimeReg" placeholder="Prezime">
+                                    <input type="text" class="form-control" name="prezimeReg" id="prezimeReg" placeholder="Prezime">
                                     
-                                    <input type="email" class="form-control" id="emailReg" placeholder="Email">
+                                    <input type="email" class="form-control" name="emailReg" id="emailReg" placeholder="Email">
                                    
-                                    <input type="password" class="form-control" id="sifraReg" placeholder="Password">
+                                    <input type="password" class="form-control" name="sifraReg" id="sifraReg" placeholder="Password">
 
-                                    <select class="form-control" id="polList">
+                                    <select class="form-control" name="polList" id="polList">
                                         <option selected value="0">Pol...</option>
-                                        <option value="1">Musko</option>
+                                        @foreach($polovi as $pol)
+                                            <option value="{{$pol->idPol}}">{{$pol->naziv}}</option>
+                                            @endforeach
                                     </select>
                                     
-                                    <input type="file" id="slikaKorisnika">
+                                    <input type="file" name="slikaKorisnika" id="slikaKorisnika">
                                     <small id="emailAlert" class="form-text text-muted">Izaberite vasu fotografiju.</small>
                                     
-                                    <button type="button" id="btnReg" class="btn btn-primary">Registruj se <i class="fa fa-envelope-open-o"></i></button>
+                                    <button type="submit" id="btnReg" class="btn btn-primary">Registruj se <i class="fa fa-envelope-open-o"></i></button>
                                 </form>
                             </div>
                         </div>

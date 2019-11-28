@@ -13,7 +13,7 @@ class ValidacijaRegistracija extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,26 +24,29 @@ class ValidacijaRegistracija extends FormRequest
     public function rules()
     {
         return [
-            'ime' => 'required|regex:/^[A-ZČĆŽŠĐ][a-zčćžšđ]{2,10}$/',
-            'prezime' => 'required|regex:/^[A-ZČĆŽŠĐ][a-zčćžšđ]{2,}$/',
-            'sifra' => 'required|regex:/^[A-Z][\w\d]{5,}$/',
-            'email' => 'required|email:rfc,dns',
-            'pol' => 'not_regex:/^[0]$/'
+            'imeReg' => 'required|regex:/^[A-ZČĆŽŠĐ][a-zčćžšđ]{2,10}$/',
+            'prezimeReg' => 'required|regex:/^[A-ZČĆŽŠĐ][a-zčćžšđ]{2,}$/',
+            'sifraReg' => 'required|regex:/^[A-Z][\w\d]{5,}$/',
+            'emailReg' => 'required|email:rfc',
+            'slikaKorisnika' => 'required|file|image|max:2000',
+            'polLista' => 'not_regex:/^[0]$/'
         ];
     }
 
     public function messages()
     {
         return [
-            'ime.required' => 'Polje za ime je obavezno.',
-            'ime.regex' => 'Ime mora da ima min 2 karaktera i max 10 i da pocne velikim slovom.',
-            'prezime.required'  => 'Polje za prezime je obavezno.',
-            'prezime.regex'  => 'Prezime mora da ima min 2 karaktera i da pocne velikim slovom.',
-            'email.email'  => 'E-mail nije u dobrom formatu.',
-            'email.required'  => 'Polje za email je obavezno.',
-            'sifra.required'  => 'Polje za sifru je obavezno.',
-            'sifra.regex'  => 'Sifra mora da sadrzi minimum 6 karaktera i da pocinje velikim slovom.',
-            'pol.not_regex'  => 'Morate izabrati pol.',
+            'imeReg.required' => 'Polje za ime je obavezno.',
+            'imeReg.regex' => 'Ime mora da ima min 2 karaktera i max 10 i da pocne velikim slovom.',
+            'prezimeReg.required'  => 'Polje za prezime je obavezno.',
+            'prezimeReg.regex'  => 'Prezime mora da ima min 2 karaktera i da pocne velikim slovom.',
+            'emailReg.email'  => 'E-mail nije u dobrom formatu.',
+            'emailReg.required'  => 'Polje za email je obavezno.',
+            'sifraReg.required'  => 'Polje za sifru je obavezno.',
+            'sifraReg.regex'  => 'Sifra mora da sadrzi minimum 6 karaktera i da pocinje velikim slovom.',
+            'polLista.not_regex'  => 'Morate izabrati pol.',
+            'slikaKorisnika.max' => 'Maksimalna velicina slike je 2 mb',
+
         ];
     }
 }
