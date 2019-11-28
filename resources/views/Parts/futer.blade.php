@@ -83,5 +83,7 @@
 <script src="plugin/notify.min.js"></script>
 <script src="plugin/notifySettings.js"></script>
 
+<script src="jsProvera/registracija.js"></script>
+
 </body>
 </html>

@@ -17,22 +17,20 @@
                             </div>
                             <div class="col-lg-7">
                                 <form class="form-wrapper">
-                                    <input type="text" class="form-control" placeholder="Ime">
+                                    <input type="text" class="form-control" id="imeReg" placeholder="Ime">
                                     <!-- <small id="imeAlert" class="form-text">We'll never share your email with anyone else.</small> -->
                                     <div id="notifications"></div>
 
-                                    <input type="text" class="form-control" placeholder="Prezime">
+                                    <input type="text" class="form-control" id="prezimeReg" placeholder="Prezime">
                                     
-                                    <input type="email" class="form-control" placeholder="Email">
+                                    <input type="email" class="form-control" id="emailReg" placeholder="Email">
                                    
 
-                                    <input type="password" class="form-control" placeholder="Password">
+                                    <input type="password" class="form-control" id="sifraReg" placeholder="Password">
 
                                     <select class="form-control" id="polList">
                                         <option selected value="0">Pol...</option>
-                                        @foreach($polovi as $pol)
-                                            <option value="{{$pol->idPol}}">{{$pol->naziv}}</option>
-                                            @endforeach
+                                       
                                     </select>
                                     
 
@@ -40,7 +38,7 @@
                                     <input type="file" id="slikaKorisnika">
                                     <small id="emailAlert" class="form-text text-muted">Izaberite vasu fotografiju.</small>
                                     
-                                    <button type="button" id="dugme" class="btn btn-primary">Send <i class="fa fa-envelope-open-o"></i></button>
+                                    <button type="button" id="btnReg" class="btn btn-primary">Registruj se <i class="fa fa-envelope-open-o"></i></button>
                                 </form>
                             </div>
                         </div>
