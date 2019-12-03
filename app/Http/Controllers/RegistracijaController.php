@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\LogovanjeValidacija;
 use App\Http\Requests\ValidacijaRegistracija;
 use App\Model\KorisnikModel;
 use App\Model\PolModel;
+use Facade\FlareClient\Http\Exceptions\NotFound;
+use http\Client\Response;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -99,14 +102,34 @@ class RegistracijaController extends Controller
         return redirect()->route('registracija')->with('uspesno','Uspesno ste aktivirali vas nalog. Hvala Vam!');
     }
 
-    public function Logovanje(Request $request)
+    public function Logovanje(LogovanjeValidacija $request)
     {
 
         $email = $request->email;
         $sifra = $request->sifra;
-        
 
-        return var_dump($email);
+        $sifra = md5($sifra);
+        try
+        {
+            $korisnik = $this->korisnikModel->Logovanje($email,$sifra);
+
+            if(empty($korisnik))
+            {
+                \Log::critical("Korisnik je pokusao da se uloguje, a ne postoji u bazi sa ip adresom -> " . $request->ip());
+                abort(500);
+
+            }else
+            {
+                $request ->session()->put('korisnik',$korisnik);
+                abort(200);
+            }
+
+        }catch (QueryException $e)
+        {
+            \Log::info("Greska pri logovanju.". $e->getMessage());
+        }
+
+
     }
 
 

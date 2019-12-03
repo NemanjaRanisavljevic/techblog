@@ -437,9 +437,13 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('kontakt')}}">Kontakt</a>
                         </li>
+
                         <li class="nav-item">
+
                             <a class="nav-link" href="{{route('registracija')}}">Registracija</a>
+
                         </li>
+
                     </ul>
                     <ul class="navbar-nav">
 
@@ -475,7 +479,7 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
                                     <button type="button" id="btnLog" class="btn btn-primary">Uloguj se</button>
                                 </div>
                             </div>

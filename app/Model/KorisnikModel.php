@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\QueryException;
 
 class KorisnikModel extends Model
 {
@@ -60,5 +61,17 @@ class KorisnikModel extends Model
         {
             \Log::info("Nije uspela aktivacija kod upita. ".$e->getMessage());
         }
+    }
+
+    public function Logovanje($email,$sifra)
+    {
+        return \DB::table('korisnik as k')
+            ->join('uloga as u','u.IdUloga','=','k.ulogaId')
+            ->where([
+                ['email',$email],
+                ['sifra',$sifra],
+                ['aktivan',1]
+            ])
+            ->first();
     }
 }

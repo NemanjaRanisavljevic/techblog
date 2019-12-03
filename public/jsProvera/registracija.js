@@ -27,6 +27,7 @@ $("#btnLog").click(function(e){
             $("#emailLog").css({"border-color":"#dadada"})
         });
         $.notify("Polje za Email je obavezno!","error");
+        greske.push("Greska email");
     }
 
     if(!regSifra.test(sifra))
@@ -58,10 +59,13 @@ $("#btnLog").click(function(e){
                 switch(status)
                 {
                     case 500:
-                        alert("Greska na serveru.");
+                        $.notify("Nepostojeci nalog.","error");
                         break;
                     case 404:
-                        alert("Nije pronadjena stranica");
+                        $.notify("Nepostojeci nalog.","error");
+                        break;
+                    case 422:
+                        $.notify("Email nije u dobrom formatu.","error");
                         break;
                 }
     
@@ -124,6 +128,7 @@ function proveraRegistracije(){
             $("#emailReg").css({"border-color":"#dadada"})
         });
         $.notify("Polje za Email je obavezno!","error");
+        greske.push("Greska email");
     }
 
     if(pol==0)
