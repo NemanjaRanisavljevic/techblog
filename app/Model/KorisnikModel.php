@@ -43,4 +43,22 @@ class KorisnikModel extends Model
             \Log::info("Greska pri insertu posta". $e->getMessage());
         }
     }
+
+    public function Aktivacija()
+    {
+        try{
+            \DB::transaction(function (){
+                \DB::table('korisnik')
+                    ->where("token",$this->token)
+                    ->first();
+                    
+                \DB::table('korisnik')
+                    ->where("token",$this->token)
+                    ->update(['aktivan'=>1]);
+            });
+        }catch (QueryException $e)
+        {
+            \Log::info("Nije uspela aktivacija kod upita. ".$e->getMessage());
+        }
+    }
 }

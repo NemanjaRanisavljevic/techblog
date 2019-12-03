@@ -6,8 +6,73 @@ $(document).ready(function(){
         }
     });
 
+    
 
 });
+
+
+$("#btnLog").click(function(e){
+    e.preventDefault();
+    var sifra = $("#sifraLog").val();
+    var email = $("#emailLog").val();
+    
+    var regSifra =/^[A-Z][\w\d]{5,}$/;
+    var greske = Array();
+        
+
+    if(email == "")
+    {
+        $("#emailLog").css({"border-color":"red"});
+        $("#emailLog").focus(function(){
+            $("#emailLog").css({"border-color":"#dadada"})
+        });
+        $.notify("Polje za Email je obavezno!","error");
+    }
+
+    if(!regSifra.test(sifra))
+    {
+        $("#sifraLog").css({"border-color":"red"});
+        $("#sifraLog").focus(function(){
+            $("#sifraLog").css({"border-color":"#dadada"})
+        });
+        $.notify("Niste dobro uneli Sifru!","error");
+        greske.push("Greska sifra");
+    }
+    
+    if(greske.length == 0)
+    {
+        $.ajax({
+            url:'logovanje',
+            type:'POST',
+            data:{
+                email:email,
+                sifra:sifra
+            },
+            success:function (data) {
+                $.notify("Uspesno ste se ulogovali","success");
+                console.log(data);
+            },
+            error(xhr)
+            {
+                var status=xhr.status;
+                switch(status)
+                {
+                    case 500:
+                        alert("Greska na serveru.");
+                        break;
+                    case 404:
+                        alert("Nije pronadjena stranica");
+                        break;
+                }
+    
+            }
+        });
+    
+    }
+    
+    
+});
+
 function proveraRegistracije(){
 
     var ime = $("#imeReg").val();
@@ -86,5 +151,6 @@ function proveraRegistracije(){
         return false;
     }
 
-
 };
+
+

@@ -16,6 +16,12 @@
                                 <p>Tech Blog is a personal blog for handcrafted, cameramade photography content, fashion styles from independent creatives around the world.</p>
                             </div>
                             <div class="col-lg-7">
+                            @if(session()->has('uspesno'))
+                                    <div class="alert alert-success">
+                                        {{session()->get("uspesno")}}
+                                    </div>
+                            @endif
+
                                 <form class="form-wrapper" enctype='multipart/form-data' action="{{route("registracija")}}" method="POST" onsubmit="return proveraRegistracije()">
                                 @csrf
                                     <input type="text" class="form-control" name="imeReg" id="imeReg" placeholder="Ime">
