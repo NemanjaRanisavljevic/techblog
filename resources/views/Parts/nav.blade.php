@@ -438,21 +438,31 @@
                             <a class="nav-link" href="{{route('kontakt')}}">Kontakt</a>
                         </li>
 
-                        <li class="nav-item">
-
+                        
+                        
+                        @if(session()->has('korisnik'))
+                            
+                        @else
+                            <li class="nav-item">
                             <a class="nav-link" href="{{route('registracija')}}">Registracija</a>
-
-                        </li>
+                            </li>
+                        @endif
+                        
+                        
 
                     </ul>
                     <ul class="navbar-nav">
-
+                    @if(session()->has('korisnik'))
+                        <li class="nav-item">
+                           <a class="nav-link" href="{{route('logout')}}">Izloguj se</a>   
+                        </li>
+                    @else
                         <li class="nav-item">
                            <a class="nav-link" href="#" data-toggle="modal" data-target="#exampleModal">Logovanje</a>   
                         </li>
+                    @endif
                     </ul>
 
-                    
                      
 
                     <!-- Modal -->
@@ -466,15 +476,15 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{route("logovanje")}}" method="POST">
+                                    <form>
                                     @csrf
                                     <div class="form-group">
-                                            <input type="email" class="form-control" id="emailLog" name="emailLog" aria-describedby="emailHelp" placeholder="Unesi email">
-                                            <small id="emailAlert" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                            <input type="email" class="form-control" id="emailLog" name="emailLog" aria-describedby="emailHelp" placeholder="Email">
+                                            
                                     </div>
                                     <div class="form-group">
-                                            <input type="password" class="form-control" id="sifraLog" name="sifraLog" placeholder="Password">  
-                                            <small id="passwordAlert" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                            <input type="password" class="form-control" id="sifraLog" name="sifraLog" placeholder="Sifra">  
+                                            <small id="passwordAlert" class="form-text text-muted">Sifra mora poceti velikim slovom i imati najmanje sest karaktera.</small>
                                     </div>
                                     </form>
                                 </div>

@@ -121,7 +121,8 @@ class RegistracijaController extends Controller
             }else
             {
                 $request ->session()->put('korisnik',$korisnik);
-                abort(200);
+                var_dump(session()->has('korisnik'));
+                
             }
 
         }catch (QueryException $e)
@@ -130,6 +131,12 @@ class RegistracijaController extends Controller
         }
 
 
+    }
+
+    public function Logout(Request $request)
+    {
+        $request->session()->forget('korisnik');   
+        return redirect()->route('index');
     }
 
 

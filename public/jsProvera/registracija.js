@@ -50,8 +50,8 @@ $("#btnLog").click(function(e){
                 sifra:sifra
             },
             success:function (data) {
-                $.notify("Uspesno ste se ulogovali","success");
-                console.log(data);
+                
+                location.reload(true);      
             },
             error(xhr)
             {
