@@ -10,3 +10,6 @@ Route::get('/aktivacija/{token}','RegistracijaController@AktivacijaNaloga');
 
 Route::post('/logovanje','RegistracijaController@Logovanje')->name('logovanje');
 Route::get('/logout','RegistracijaController@Logout')->name('logout');
+
+Route::get('/post','PostController@PostPrikaz')->name('post');
+Route::post('/post','PostController@InsertPosta');

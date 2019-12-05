@@ -2,6 +2,7 @@
 
 
 @section("sredina")
+    @section("iconStranice")<i class="fa fa-user-o bg-orange"></i>@endsection
     @section("naslovStranice")Registracija @endsection
     @include("Parts.slajderZaOstale")
 
@@ -44,7 +45,7 @@
                                     <input type="file" name="slikaKorisnika" id="slikaKorisnika">
                                     <small id="emailAlert" class="form-text text-muted">Izaberite vasu fotografiju.</small>
                                     
-                                    <button type="submit" id="btnReg" class="btn btn-primary">Registruj se <i class="fa fa-envelope-open-o"></i></button>
+                                    <button type="submit" id="btnReg" class="btn btn-primary">Registruj se <i class="fa fa-user-o"></i></button>
                                 </form>
                             </div>
                         </div>

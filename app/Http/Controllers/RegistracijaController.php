@@ -44,8 +44,6 @@ class RegistracijaController extends Controller
 
         try
         {
-            
-
             $slika->move(public_path("upload"),$slikaIme);
 
             $this->korisnikModel->ime = $request->imeReg;
@@ -94,7 +92,6 @@ class RegistracijaController extends Controller
         }
     }
 
-
     public function AktivacijaNaloga($token)
     {
         $this->korisnikModel->token = $token;
@@ -130,7 +127,6 @@ class RegistracijaController extends Controller
             \Log::info("Greska pri logovanju.". $e->getMessage());
         }
 
-
     }
 
     public function Logout(Request $request)
@@ -138,6 +134,5 @@ class RegistracijaController extends Controller
         $request->session()->forget('korisnik');   
         return redirect()->route('index');
     }
-
 
 }

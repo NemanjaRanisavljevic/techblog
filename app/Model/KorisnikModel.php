@@ -41,7 +41,7 @@ class KorisnikModel extends Model
 
         }catch (\Throwable $e)
         {
-            \Log::info("Greska pri insertu posta". $e->getMessage());
+            \Log::info("Greska pri insertu korisnika". $e->getMessage());
         }
     }
 

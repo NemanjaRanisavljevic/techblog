@@ -84,6 +84,7 @@
 <script src="plugin/notifySettings.js"></script>
 
 <script src="jsProvera/registracija.js"></script>
+<script src="jsProvera/post.js"></script>
 
 </body>
 </html>

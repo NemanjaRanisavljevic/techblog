@@ -441,10 +441,12 @@
                         
                         
                         @if(session()->has('korisnik'))
-                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('post')}}">Kreiranje objave</a>
+                            </li>
                         @else
                             <li class="nav-item">
-                            <a class="nav-link" href="{{route('registracija')}}">Registracija</a>
+                                <a class="nav-link" href="{{route('registracija')}}">Registracija</a>
                             </li>
                         @endif
                         
