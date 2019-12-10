@@ -35,4 +35,14 @@ class PostModel extends Model
             \Log::info("Greska pri insertu posta". $e->getMessage());
         }
     }
+
+    public function PrikazPostova()
+    {
+        return \DB::table("post as p")
+            ->join("kategorija as ka","ka.idKategorija","=","p.kategorijaId")
+            ->join("korisnik as k","k.idKorisnik","=","p.korisnikId")
+            ->join("slika as s","s.idSlika","=","p.slikaId")
+            ->orderBy('s.create_on','DESC')
+            ->paginate(6);
+    }
 }
