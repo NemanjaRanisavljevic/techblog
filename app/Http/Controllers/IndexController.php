@@ -18,7 +18,10 @@ class IndexController extends Controller
     public function IndexPrikaz()
     {
         $postovi = $this->postModel->PrikazPostova();
+
+        $slajderPost = $this->postModel->PrikazSlajda();
+        
        
-        return view('Pages/pocetna',['postovi'=>$postovi]);
+        return view('Pages/pocetna',['postovi'=>$postovi,'slajderData'=>$slajderPost]);
     }
 }

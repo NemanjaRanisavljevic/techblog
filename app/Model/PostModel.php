@@ -45,4 +45,15 @@ class PostModel extends Model
             ->orderBy('s.create_on','DESC')
             ->paginate(6);
     }
+
+    public function PrikazSlajda()
+    {
+        return \DB::table("post as p")
+        ->join("kategorija as ka","ka.idKategorija","=","p.kategorijaId")
+        ->join("korisnik as k","k.idKorisnik","=","p.korisnikId")
+        ->join("slika as s","s.idSlika","=","p.slikaId")
+        ->orderBy('s.create_on','DESC')
+        ->limit(3)
+        ->get();
+    }
 }
