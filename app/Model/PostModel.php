@@ -56,4 +56,24 @@ class PostModel extends Model
         ->limit(3)
         ->get();
     }
+
+    public function PrikazNavBara($id)
+    {
+        
+
+        try {
+
+            return \DB::table("post as p")
+                ->join("kategorija as ka","ka.idKategorija","=","p.kategorijaId")
+                ->join("korisnik as k","k.idKorisnik","=","p.korisnikId")
+                ->join("slika as s","s.idSlika","=","p.slikaId")
+                ->where('p.kategorijaId',$id)
+                ->limit(4)
+                ->orderBy('s.create_on','DESC')
+                ->get();
+        }catch(\Throwable $e){
+            \Log::info("Greska baze". $e->getMessage());
+        }
+
+    }
 }

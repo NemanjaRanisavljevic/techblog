@@ -85,6 +85,7 @@
 
 <script src="jsProvera/registracija.js"></script>
 <script src="jsProvera/post.js"></script>
+<script src="jsProvera/slajderJs.js"></script>
 
 </body>
 </html>

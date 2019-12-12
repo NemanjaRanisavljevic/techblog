@@ -26,8 +26,9 @@ class RegistracijaController extends Controller
 
     public function RegistracijaPrikaz()
     {
-         $polModel = new PolModel();
-         $polovi = $polModel->GetPol();
+        
+        $polModel = new PolModel();
+        $polovi = $polModel->GetPol();
 
         return view('Pages/registracija',["polovi"=>$polovi]);
     }

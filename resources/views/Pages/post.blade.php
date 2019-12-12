@@ -27,8 +27,12 @@
                             
                                 <form class="form-wrapper" enctype='multipart/form-data' action="{{route("post")}}" method="POST" onsubmit="return CreatePost()">
                                 @csrf
+                                
                                     <select class="form-control" id="ddlKategorija" name="ddlKategorija">
-                                        <option value="1">Radi</option>
+                                    <option value="0">Izaberite kategoriju</option>
+                                    @foreach($kategorije as $kat)
+                                        <option value="{{$kat->idKategorija}}">{{$kat->nazivKategorije}}</option>
+                                    @endforeach
                                     </select>
                                     <input type="text" class="form-control" id="naslov" name="naslov" placeholder="Naslov"> 
                                     

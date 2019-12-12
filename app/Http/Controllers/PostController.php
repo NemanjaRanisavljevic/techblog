@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\ValidacijaObjava;
 use App\Model\PostModel;
+use App\Model\KategorijeModel;
 
 use Illuminate\Http\Request;
 
@@ -18,7 +19,10 @@ class PostController extends Controller
 
     public function PostPrikaz()
     {
-        return view('Pages/post');
+        $kategorijaModel = new KategorijeModel();
+        $kategorije = $kategorijaModel->GetKategorije();
+
+        return view('Pages/post',["kategorije"=>$kategorije]);
     }
 
     public function InsertPosta(ValidacijaObjava $request)

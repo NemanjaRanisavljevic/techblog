@@ -8,53 +8,46 @@
     <div class="container-fluid">
         <div class="masonry-blog clearfix">
         
-            <div class="first-slot">
+        @foreach($slajderData as $x)
+
+        <?php
+            $vreme = $x->create_on;
+            $datumNiz = explode(" ",$vreme);
+            $datum = explode("-",$datumNiz[0]);
+            $timestemp = mktime(0,0,0,$datum[1],$datum[2],$datum[0]);
+            $datumPrikaz = date("j F, Y",$timestemp);
+
+        ?>
+
+        @switch($loop->index)
+            @case(0)
+                <div class="first-slot">
+            @break
+            @case(1)
+                <div class="second-slot">
+            @break
+            @case (2)
+                <div class="last-slot">
+        @endswitch
+            
                 <div class="masonry-box post-media">
-                    <img src="" alt="" class="img-fluid">
+                    <img src="upload/{{ $x->putanja}}" alt="" class="img-fluid sliderOne">
                     <div class="shadoweffect">
                         <div class="shadow-desc">
                             <div class="blog-meta">
-                                <span class="bg-orange"><a href="tech-category-01.html" title="">{{ $slajderData[0]->nazivKategorije }}</a></span>
-                                <h4><a href="tech-single.html" title="">{{ $slajderData[0]->naslov }}</a></h4>
-                                <small><a href="tech-single.html" title="">24 July, 2017</a></small>
-                                <small><a href="tech-author.html" title="">{{ $slajderData[0]->ime }} {{ $slajderData[0]->prezime }}</a></small>
+                                <span class="bg-orange"><a href="tech-category-01.html" title="">{{ $x->nazivKategorije }}</a></span>
+                                <h4><a href="tech-single.html" title="">{{ $x->naslov }}</a></h4>
+                                <small><a href="tech-single.html" title="">{{$datumPrikaz}}</a></small>
+                                <small><a href="tech-author.html" title="">{{ $x->ime }}</a></small>
                             </div><!-- end meta -->
                         </div><!-- end shadow-desc -->
                     </div><!-- end shadow -->
                 </div><!-- end post-media -->
             </div><!-- end first-side -->
 
-            <div class="second-slot">
-                <div class="masonry-box post-media">
-                    <img src="upload/tech_02.jpg" alt="" class="img-fluid">
-                    <div class="shadoweffect">
-                        <div class="shadow-desc">
-                            <div class="blog-meta">
-                                <span class="bg-orange"><a href="tech-category-01.html" title="">{{ $slajderData[1]->nazivKategorije }}</a></span>
-                                <h4><a href="tech-single.html" title="">{{ $slajderData[1]->naslov }}</a></h4>
-                                <small><a href="tech-single.html" title="">03 July, 2017</a></small>
-                                <small><a href="tech-author.html" title="">{{ $slajderData[1]->ime }} {{ $slajderData[1]->prezime }}</a></small>
-                            </div><!-- end meta -->
-                        </div><!-- end shadow-desc -->
-                    </div><!-- end shadow -->
-                </div><!-- end post-media -->
-            </div><!-- end second-side -->
+            @endforeach
 
-            <div class="last-slot">
-                <div class="masonry-box post-media">
-                    <img src="upload/tech_03.jpg" alt="" class="img-fluid">
-                    <div class="shadoweffect">
-                        <div class="shadow-desc">
-                            <div class="blog-meta">
-                                <span class="bg-orange"><a href="tech-category-01.html" title="">{{ $slajderData[2]->nazivKategorije }}</a></span>
-                                <h4><a href="tech-single.html" title="">{{ $slajderData[2]->naslov }}</a></h4>
-                                <small><a href="tech-single.html" title="">01 July, 2017</a></small>
-                                <small><a href="tech-author.html" title="">{{ $slajderData[2]->ime }} {{ $slajderData[2]->prezime }}</a></small>
-                            </div><!-- end meta -->
-                        </div><!-- end shadow-desc -->
-                    </div><!-- end shadow -->
-                </div><!-- end post-media -->
-            </div><!-- end second-side -->
+            
         </div><!-- end masonry -->
     </div>
 </section>
