@@ -40,17 +40,13 @@
                                             </div>
 
                                             <div class="tab-details clearfix">
-                                                
-                                                <div id="cat03" class="tabcontent">
+                                                <div id="cat01" class="tabcontent active">
                                                     <div class="row" id="ispisNavKat">
                                                         
-
-                                                     
                                                     </div><!-- end row -->
                                                 </div>
+                                                
                                                
-
-                                                       
                                             </div><!-- end tab-details -->
                                         </div><!-- end mega-menu-content -->
                                     </div>
@@ -140,3 +136,4 @@
             </nav>
         </div><!-- end container-fluid -->
     </header><!-- end market-header -->
+

@@ -29,6 +29,7 @@ class IndexController extends Controller
         return view('Pages/pocetna',['postovi'=>$postovi,'slajderData'=>$slajderPost,'kategorije'=>$kategorijeData]);
     }
 
+
     public function PrikazKategorijaNav(Request $request)
     {
         try {

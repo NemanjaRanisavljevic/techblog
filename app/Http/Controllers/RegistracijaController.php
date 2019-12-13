@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LogovanjeValidacija;
 use App\Http\Requests\ValidacijaRegistracija;
 use App\Model\KorisnikModel;
+use App\Model\KategorijeModel;
 use App\Model\PolModel;
 use Facade\FlareClient\Http\Exceptions\NotFound;
 use http\Client\Response;
@@ -30,7 +31,10 @@ class RegistracijaController extends Controller
         $polModel = new PolModel();
         $polovi = $polModel->GetPol();
 
-        return view('Pages/registracija',["polovi"=>$polovi]);
+        $kategorijaModel = new KategorijeModel();
+        $kategorijeData = $kategorijaModel->GetKategorije();
+
+        return view('Pages/registracija',["polovi"=>$polovi,'kategorije'=>$kategorijeData]);
     }
 
     public function PosRegistracija(ValidacijaRegistracija $request)
