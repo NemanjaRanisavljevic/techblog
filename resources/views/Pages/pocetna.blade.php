@@ -7,6 +7,12 @@
 <section class="section first-section">
     <div class="container-fluid">
         <div class="masonry-blog clearfix">
+
+        @if(session()->has('uspesno'))
+            <div class="alert alert-success">
+                {{session()->get("uspesno")}}
+            </div>
+        @endif
         
         @foreach($slajderData as $x)
 
@@ -16,7 +22,6 @@
             $datum = explode("-",$datumNiz[0]);
             $timestemp = mktime(0,0,0,$datum[1],$datum[2],$datum[0]);
             $datumPrikaz = date("j F, Y",$timestemp);
-
         ?>
 
         @switch($loop->index)

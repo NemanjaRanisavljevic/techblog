@@ -60,9 +60,8 @@ class PostModel extends Model
     public function PrikazNavBara($id)
     {
         
-
-        try {
-
+        try 
+        {
             return \DB::table("post as p")
                 ->join("kategorija as ka","ka.idKategorija","=","p.kategorijaId")
                 ->join("korisnik as k","k.idKorisnik","=","p.korisnikId")
@@ -71,9 +70,44 @@ class PostModel extends Model
                 ->limit(4)
                 ->orderBy('s.create_on','DESC')
                 ->get();
+
         }catch(\Throwable $e){
             \Log::info("Greska baze". $e->getMessage());
         }
 
     }
+
+    public function GetIdPost($id)
+    {
+        try 
+        {
+            return \DB::table("post as p")
+                ->join("kategorija as ka","ka.idKategorija","=","p.kategorijaId")
+                ->join("korisnik as k","k.idKorisnik","=","p.korisnikId")
+                ->join("slika as s","s.idSlika","=","p.slikaId")
+                ->where('p.idPost',$id)
+                ->get();
+        } catch (\Throwable $e) 
+        {
+            \Log::info("Greska baze". $e->getMessage());
+        }
+    }
+
+    public function GetKorisnikInfo($id)
+    {
+        try 
+        {
+            return \DB::table("post as p")
+                ->join("korisnik as k","k.idKorisnik","=","p.korisnikId")
+                ->join("slika as s","s.idSlika","=","k.idKorisnik")
+                ->where('p.idPost',$id)
+                ->select('s.putanja')
+                ->get();
+        } catch (\Throwable $e) 
+        {
+            \Log::info("Greska baze". $e->getMessage());
+        }
+        
+    }
+    
 }

@@ -9,7 +9,7 @@
                         aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a class="navbar-brand" href="{{route('index')}}"><img src="images/version/tech-logo.png" alt="logo"></a>
+                <a class="navbar-brand" href="{{route('index')}}"><img src="{{asset('/')}}images/version/tech-logo.png" alt="logo"></a>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">

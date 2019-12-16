@@ -14,4 +14,6 @@ Route::get('/logout','RegistracijaController@Logout')->name('logout');
 Route::get('/post','PostController@PostPrikaz')->name('post');
 Route::post('/post','PostController@InsertPosta');
 
-Route::get('kat-nav/{id}','IndexController@PrikazKategorijaNav');
+Route::get('/single-post/{id}','SinglePostController@GetIdSingle');
+
+Route::get('/kat-nav/{id}','IndexController@PrikazKategorijaNav');

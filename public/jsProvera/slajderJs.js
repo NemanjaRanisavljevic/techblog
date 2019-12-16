@@ -1,9 +1,9 @@
 $(document).ready(function() {
-
+    
 
 
     $.ajax({
-        url:'kat-nav/id',
+        url: baseUrl +'/kat-nav/id',
         type:'GET',
         data:{
             id:1
@@ -16,7 +16,7 @@ $(document).ready(function() {
                         <div class="blog-box"> 
                             <div class="post-media">
                                 <a href="tech-single.html" title="">
-                                    <img src="upload/${value.putanja}" alt="${value.nazivKategorije}" class="img-fluid">
+                                    <img src="${baseUrl}/upload/${value.putanja}" alt="${value.nazivKategorije}" class="img-fluid">
                                         <div class="hovereffect"></div>
                                         <span class="menucat"> ${value.nazivKategorije} <span>
                                 </a>
@@ -56,7 +56,7 @@ $(".linkSlajder").click(function () {
     var idKategorije = $(this).attr('data-id');
     
     $.ajax({
-        url:'kat-nav/id',
+        url: baseUrl + '/kat-nav/id',
         type:'GET',
         data:{
             id:idKategorije
@@ -69,7 +69,7 @@ $(".linkSlajder").click(function () {
                         <div class="blog-box"> 
                             <div class="post-media">
                                 <a href="tech-single.html" title="">
-                                    <img src="upload/${value.putanja}" alt="${value.nazivKategorije}" class="img-fluid">
+                                    <img src="${baseUrl}/upload/${value.putanja}" alt="${value.nazivKategorije}" class="img-fluid">
                                         <div class="hovereffect"></div>
                                         <span class="menucat"> ${value.nazivKategorije} <span>
                                 </a>

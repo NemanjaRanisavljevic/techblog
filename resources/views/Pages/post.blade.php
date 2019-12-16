@@ -20,8 +20,8 @@
                             <div class="col-lg-7">
 
                             @if(session()->has('uspesno'))
-                                    <div class="alert alert-success">
-                                        {{session()->get("uspesno")}}
+                                    <div class="alert alert-error">
+                                        {{session()->get("NotFoundPost")}}
                                     </div>
                             @endif
                             
