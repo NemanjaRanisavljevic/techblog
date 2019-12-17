@@ -93,15 +93,17 @@ class PostModel extends Model
         }
     }
 
-    public function GetKorisnikInfo($id)
+    public function GetKomentari($id)
     {
         try 
         {
             return \DB::table("post as p")
                 ->join("korisnik as k","k.idKorisnik","=","p.korisnikId")
                 ->join("slika as s","s.idSlika","=","k.idKorisnik")
+                ->join("komentar as kom","kom.postId","=","p.idPost")
+                ->select('k.ime','k.prezime','kom.idKomentar','kom.sadrzaj','kom.create_on','s.putanja',\DB::raw('count(kom.idKomentar) as brojKomentara'))
                 ->where('p.idPost',$id)
-                ->select('s.putanja')
+                ->groupBy('kom.idKomentar','k.ime','k.prezime','kom.idKomentar','kom.sadrzaj','kom.create_on','s.putanja')
                 ->get();
         } catch (\Throwable $e) 
         {

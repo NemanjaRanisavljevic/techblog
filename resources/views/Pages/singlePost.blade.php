@@ -52,89 +52,62 @@
                                 
                             </div><!-- end content -->
 
-                            <hr class="invis1">
-
-                            <div class="custombox authorbox clearfix">
-                                <h4 class="small-title">O autoru</h4>
-                                <div class="row">
-                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                                        <img src="{{asset('/')}}upload/{{$korisnikInfo[0]->putanja}}" alt="" class="img-fluid rounded-circle"> 
-                                    </div><!-- end col -->
-
-                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                        <h4><a href="#">{{$infoPost[0]->ime}} {{$infoPost[0]->prezime}}</a></h4>
-                                        <p>Quisque sed tristique felis. Lorem <a href="#">visit my website</a> amet, consectetur adipiscing elit. Phasellus quis mi auctor, tincidunt nisl eget, finibus odio. Duis tempus elit quis risus congue feugiat. Thanks for stop Tech Blog!</p>
-
-                                       
-
-                                    </div><!-- end col -->
-                                </div><!-- end row -->
-                            </div><!-- end author-box -->
 
                             <hr class="invis1">
 
 
                             <div class="custombox clearfix">
-                                <h4 class="small-title">3 Comments</h4>
+                            @if(!empty($komentari))
+                                <h4 class="small-title">0 Komentara</h4>
+                            @endif
+                            @foreach($komentari as $komentar)
+                            <?php
+                                    $vreme = $komentar->create_on;
+                                    $datumNiz = explode(" ",$vreme);
+                                    $datum = explode("-",$datumNiz[0]);
+                                    $timestemp = mktime(0,0,0,$datum[1],$datum[2],$datum[0]);
+                                    $datumPrikazKom = date("j F, Y ",$timestemp);
+                                    
+                                ?>
+                            <h4 class="small-title">{{$loop->index + 1}} Komentara</h4>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="comments-list">
                                             <div class="media">
                                                 <a class="media-left" href="#">
-                                                    <img src="{{asset('/')}}upload/author.jpg" alt="" class="rounded-circle">
+                                                    <img src="{{asset('/')}}upload/{{$komentar->putanja}}" alt="" class="rounded-circle">
                                                 </a>
                                                 <div class="media-body">
-                                                    <h4 class="media-heading user_name">Amanda Martines <small>5 days ago</small></h4>
-                                                    <p>Exercitation photo booth stumptown tote bag Banksy, elit small batch freegan sed. Craft beer elit seitan exercitation, photo booth et 8-bit kale chips proident chillwave deep v laborum. Aliquip veniam delectus, Marfa eiusmod Pinterest in do umami readymade swag. Selfies iPhone Kickstarter, drinking vinegar jean.</p>
-                                                    <a href="#" class="btn btn-primary btn-sm">Reply</a>
+                                                    <h4 class="media-heading user_name">{{$komentar->ime}} {{$komentar->prezime}}<small>{{$datumPrikazKom}}</small></h4>
+                                                    <p>{{$komentar->sadrzaj}}</p>
+                                                    <!-- <a href="#" class="btn btn-primary btn-sm">Reply</a> -->
                                                 </div>
                                             </div>
-                                            <div class="media">
-                                                <a class="media-left" href="#">
-                                                    <img src="upload/author_01.jpg" alt="" class="rounded-circle">
-                                                </a>
-                                                <div class="media-body">
-
-                                                    <h4 class="media-heading user_name">Baltej Singh <small>5 days ago</small></h4>
-
-                                                    <p>Drinking vinegar stumptown yr pop-up artisan sunt. Deep v cliche lomo biodiesel Neutra selfies. Shorts fixie consequat flexitarian four loko tempor duis single-origin coffee. Banksy, elit small.</p>
-
-                                                    <a href="#" class="btn btn-primary btn-sm">Reply</a>
-                                                </div>
-                                            </div>
-                                            <div class="media last-child">
-                                                <a class="media-left" href="#">
-                                                    <img src="{{asset('/')}}upload/author_02.jpg" alt="" class="rounded-circle">
-                                                </a>
-                                                <div class="media-body">
-
-                                                    <h4 class="media-heading user_name">Marie Johnson <small>5 days ago</small></h4>
-                                                    <p>Kickstarter seitan retro. Drinking vinegar stumptown yr pop-up artisan sunt. Deep v cliche lomo biodiesel Neutra selfies. Shorts fixie consequat flexitarian four loko tempor duis single-origin coffee. Banksy, elit small.</p>
-
-                                                    <a href="#" class="btn btn-primary btn-sm">Reply</a>
-                                                </div>
-                                            </div>
+                                           
                                         </div>
                                     </div><!-- end col -->
                                 </div><!-- end row -->
+                                
+                                @endforeach
                             </div><!-- end custom-box -->
 
                             <hr class="invis1">
 
                             <div class="custombox clearfix">
-                                <h4 class="small-title">Leave a Reply</h4>
+                                <h4 class="small-title">Komentarisi</h4>
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <form class="form-wrapper">
-                                            <input type="text" class="form-control" placeholder="Your name">
-                                            <input type="text" class="form-control" placeholder="Email address">
-                                            <input type="text" class="form-control" placeholder="Website">
-                                            <textarea class="form-control" placeholder="Your comment"></textarea>
-                                            <button type="submit" class="btn btn-primary">Submit Comment</button>
+                                        <form class="form-wrapper" method="POST">
+                                        @csrf
+                                            <input type="hidden" class="form-control" id="skriveniIdPosta" name="skriveniIdPosta" value="{{$infoPost[0]->idPost}}">
+                                            <textarea class="form-control" id="txtKomentar" name="txtKomentar" placeholder="Tvoj komentar"></textarea>
+                                            <button type="button" id="btnKomentar" name="btnKomentar" class="btn btn-primary">Komentarisi</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
+
+
                         </div><!-- end page-wrapper -->
                     </div><!-- end col -->
 @include("Parts.reklameBaneri")

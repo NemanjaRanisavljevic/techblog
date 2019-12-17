@@ -41,9 +41,9 @@
                         <div class="shadow-desc">
                             <div class="blog-meta">
                                 <span class="bg-orange"><a href="tech-category-01.html" title="">{{ $x->nazivKategorije }}</a></span>
-                                <h4><a href="tech-single.html" title="">{{ $x->naslov }}</a></h4>
-                                <small><a href="tech-single.html" title="">{{$datumPrikaz}}</a></small>
-                                <small><a href="tech-author.html" title="">{{ $x->ime }}</a></small>
+                                <h4><a href="{{ route('single',['id'=>$x->idPost])}}" title="">{{ $x->naslov }}</a></h4>
+                                <small><a href="{{ route('single',['id'=>$x->idPost])}}" title="">{{$datumPrikaz}}</a></small>
+                                <small><a href="{{ route('single',['id'=>$x->idPost])}}" title="">{{ $x->ime }}</a></small>
                             </div><!-- end meta -->
                         </div><!-- end shadow-desc -->
                     </div><!-- end shadow -->
@@ -87,7 +87,7 @@
                     <div class="blog-box row">
                             <div class="col-md-4">
                                 <div class="post-media">
-                                    <a href="tech-single.html" title="">
+                                    <a href="{{ route('single',['id'=>$p->idPost])}}" title="">
                                         <img src="{{asset("upload/"."$p->putanja")}}" alt="{{ $p->alt}}" class="img-fluid">
                                         <div class="hovereffect"></div>
                                     </a>
@@ -95,11 +95,11 @@
                             </div><!-- end col -->
 
                             <div class="blog-meta big-meta col-md-8">
-                                <h4><a href="tech-single.html" title="">{{ $p->naslov }}</a></h4>
+                                <h4><a href="{{ route('single',['id'=>$p->idPost])}}" title="">{{ $p->naslov }}</a></h4>
                                 <p>{{ $p->opis }}</p>
                                 <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">{{ $p->nazivKategorije }}</a></small>
-                                <small><a href="tech-single.html" title="">{{$datumPrikaz}}</a></small>
-                                <small><a href="#" title="">{{ $p->ime}} {{$p->prezime }}</a></small>
+                                <small><a href="{{ route('single',['id'=>$p->idPost])}}" title="">{{$datumPrikaz}}</a></small>
+                                <small><a href="{{ route('single',['id'=>$p->idPost])}}" title="">{{ $p->ime}} {{$p->prezime }}</a></small>
                                 
                             </div><!-- end meta -->
                     </div><!-- end blog-box -->

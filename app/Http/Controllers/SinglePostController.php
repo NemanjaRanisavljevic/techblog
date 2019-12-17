@@ -30,12 +30,18 @@ class SinglePostController extends Controller
             
         }else
         {
-            $korisnikInfo = $this->postModel->GetKorisnikInfo($request->id);
-            return view('Pages/singlePost',['kategorije'=>$kategorijeData,'infoPost'=>$postData,'korisnikInfo'=>$korisnikInfo]);
+            $komentari = $this->postModel->GetKomentari($request->id);
+            
+            return view('Pages/singlePost',['kategorije'=>$kategorijeData,'infoPost'=>$postData,'komentari'=>$komentari]);
         }
        
        } catch (QueryException $e) {
         \Log::info("Greska pri ucitavanju id stranice". $e->getMessage());
        }
+    }
+
+    public function InsertKomentara(Request $request)
+    {
+        return dd("radi");
     }
 }
