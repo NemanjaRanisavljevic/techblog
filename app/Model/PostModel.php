@@ -111,5 +111,16 @@ class PostModel extends Model
         }
         
     }
+
+    public function PrikazPostovaPoKategoriji($id)
+    {
+        return \DB::table("post as p")
+            ->join("kategorija as ka","ka.idKategorija","=","p.kategorijaId")
+            ->join("korisnik as k","k.idKorisnik","=","p.korisnikId")
+            ->join("slika as s","s.idSlika","=","p.slikaId")
+            ->where("p.kategorijaId",$id)
+            ->orderBy('s.create_on','DESC')
+            ->paginate(6);
+    }
     
 }

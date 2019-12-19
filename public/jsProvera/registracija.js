@@ -43,7 +43,7 @@ $("#btnLog").click(function(e){
     if(greske.length == 0)
     {
         $.ajax({
-            url:'logovanje',
+            url: baseUrl + '/logovanje',
             type:'POST',
             data:{
                 email:email,

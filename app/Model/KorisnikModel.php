@@ -21,6 +21,7 @@ class KorisnikModel extends Model
         try
         {
             \DB::transaction(function(){
+                
                 $slikaId = \DB::table("slika")->insertGetId([
                     "putanja" => $this->slikaIme,
                     "alt"=> $this->ime

@@ -16,7 +16,7 @@
                                     <li class="breadcrumb-item active">{{$infoPost[0]->naslov}}</li>
                                 </ol>
 
-                                <span class="color-orange"><a href="tech-category-01.html" title="">{{$infoPost[0]->nazivKategorije}}</a></span>
+                                <span class="color-orange"><a href="{{route('kat-all',['id'=>$infoPost[0]->idKategorija])}}" title="">{{$infoPost[0]->nazivKategorije}}</a></span>
 
                                 <h3>{{$infoPost[0]->naslov}}</h3>
 
@@ -32,7 +32,7 @@
                                 <div class="blog-meta big-meta">
                                     <small><a href="tech-single.html" title="">{{$datumPrikaz}}</a></small>
                                     <small><a href="tech-author.html" title="">{{$infoPost[0]->ime}} {{$infoPost[0]->prezime}}</a></small>
-                                    <small><a href="#" title=""><i class="fa fa-eye"></i> 2344</a></small>
+                                    
                                 </div><!-- end meta -->
 
                                
@@ -55,19 +55,23 @@
 
                             <hr class="invis1">
 
-
-                            <div class="custombox clearfix">
+                            
+                            <div class="custombox clearfix" id="ispisKomentara">
                             @if(!empty($komentari))
                                 <h4 class="small-title">0 Komentara</h4>
                             @endif
+
+                            <?php
+                                $brKomentara = 0;
+                            ?>
                             @foreach($komentari as $komentar)
                             <?php
                                     $vreme = $komentar->create_on;
                                     $datumNiz = explode(" ",$vreme);
                                     $datum = explode("-",$datumNiz[0]);
                                     $timestemp = mktime(0,0,0,$datum[1],$datum[2],$datum[0]);
-                                    $datumPrikazKom = date("j F, Y ",$timestemp);
-                                    
+                                    $datumPrikazKom = date("j F, Y ",$timestemp); 
+                                    $brKomentara = $loop->index + 1;
                                 ?>
                             <h4 class="small-title">{{$loop->index + 1}} Komentara</h4>
                                 <div class="row">
@@ -90,22 +94,26 @@
                                 
                                 @endforeach
                             </div><!-- end custom-box -->
+                            
 
                             <hr class="invis1">
-
-                            <div class="custombox clearfix">
-                                <h4 class="small-title">Komentarisi</h4>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <form class="form-wrapper" method="POST">
-                                        @csrf
-                                            <input type="hidden" class="form-control" id="skriveniIdPosta" name="skriveniIdPosta" value="{{$infoPost[0]->idPost}}">
-                                            <textarea class="form-control" id="txtKomentar" name="txtKomentar" placeholder="Tvoj komentar"></textarea>
-                                            <button type="button" id="btnKomentar" name="btnKomentar" class="btn btn-primary">Komentarisi</button>
-                                        </form>
+                            @if(session()->has('korisnik'))
+                                <div class="custombox clearfix">
+                                    <h4 class="small-title">Komentarisi</h4>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <form class="form-wrapper" method="POST">
+                                            @csrf 
+                                                <input type="hidden" class="form-control" id="skriveniBrKomentara" name="skriveniBrKomentara" value="{{$brKomentara}}">                                          
+                                                <input type="hidden" class="form-control" id="skriveniIdPosta" name="skriveniIdPosta" value="{{$infoPost[0]->idPost}}">
+                                                <input type="hidden" class="form-control" id="skriveniIdKorisnika" name="skriveniIdKorisnika" value="{{session('korisnik')->idKorisnik}}">
+                                                <textarea class="form-control" id="txtKomentar" name="txtKomentar" placeholder="Tvoj komentar"></textarea>
+                                                <button type="button" id="btnKomentar" name="btnKomentar" class="btn btn-primary">Komentarisi</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
 
 
                         </div><!-- end page-wrapper -->

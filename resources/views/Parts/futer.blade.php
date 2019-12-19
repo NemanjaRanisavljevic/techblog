@@ -28,14 +28,12 @@
 
             <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                 <div class="widget">
-                    <h2 class="widget-title">Popular Categories</h2>
+                    <h2 class="widget-title">Kategorije</h2>
                     <div class="link-widget">
                         <ul>
-                            <li><a href="#">Marketing <span>(21)</span></a></li>
-                            <li><a href="#">SEO Service <span>(15)</span></a></li>
-                            <li><a href="#">Digital Agency <span>(31)</span></a></li>
-                            <li><a href="#">Make Money <span>(22)</span></a></li>
-                            <li><a href="#">Blogging <span>(66)</span></a></li>
+                        @foreach($kategorije as $kateBroj)
+                            <li><a href="{{route('kat-all',['id'=>$kateBroj->idKategorija])}}">{{$kateBroj->nazivKategorije}} <span>({{$kateBroj->brojPostova}})</span></a></li>
+                        @endforeach
                         </ul>
                     </div><!-- end link-widget -->
                 </div><!-- end widget -->

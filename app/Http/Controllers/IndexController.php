@@ -25,8 +25,20 @@ class IndexController extends Controller
         $slajderPost = $this->postModel->PrikazSlajda();
 
         $kategorijeData = $this->kategorijeModel->GetKategorije();
-        
+
         return view('Pages/pocetna',['postovi'=>$postovi,'slajderData'=>$slajderPost,'kategorije'=>$kategorijeData]);
+    }
+
+    public function GetSvihPostovaZaKategoriju(Request $request)
+    {
+        
+        $postovi = $this->postModel->PrikazPostovaPoKategoriji($request->id);
+
+        $slajderPost = $this->postModel->PrikazSlajda();
+
+        $kategorijeData = $this->kategorijeModel->GetKategorije();
+
+        return view('Pages/stranaOdredjeneKategorije',['postovi'=>$postovi,'slajderData'=>$slajderPost,'kategorije'=>$kategorijeData]);
     }
 
 
