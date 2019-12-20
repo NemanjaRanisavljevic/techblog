@@ -20,3 +20,4 @@ Route::get('/kat-nav/{id}','IndexController@PrikazKategorijaNav');
 Route::get('/kat-all/{id}','IndexController@GetSvihPostovaZaKategoriju')->name('kat-all');
 
 Route::post('/komentar','SinglePostController@InsertKomentara');
+Route::post('/kontakt','KontaktController@SlanjeEmaila')->name('kontakt');

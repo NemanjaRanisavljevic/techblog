@@ -5,17 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\PostModel;
 use App\Model\KategorijeModel;
+use App\Model\KomentarModel;
 
 class IndexController extends Controller
 {
     
     private $postModel;
     private $kategorijeModel;
+    private $komentarModel;
 
     public function __construct()
     {
         $this->postModel = new PostModel();
         $this->kategorijeModel = new KategorijeModel();
+        $this->komentarModel = new KomentarModel();
     }
 
     public function IndexPrikaz()
@@ -26,7 +29,9 @@ class IndexController extends Controller
 
         $kategorijeData = $this->kategorijeModel->GetKategorije();
 
-        return view('Pages/pocetna',['postovi'=>$postovi,'slajderData'=>$slajderPost,'kategorije'=>$kategorijeData]);
+        $najKomentari = $this->komentarModel->GetNajkomentarisanije();
+        
+        return view('Pages/pocetna',['postovi'=>$postovi,'slajderData'=>$slajderPost,'kategorije'=>$kategorijeData,'najkomentarisanije'=>$najKomentari]);
     }
 
     public function GetSvihPostovaZaKategoriju(Request $request)
@@ -38,7 +43,9 @@ class IndexController extends Controller
 
         $kategorijeData = $this->kategorijeModel->GetKategorije();
 
-        return view('Pages/stranaOdredjeneKategorije',['postovi'=>$postovi,'slajderData'=>$slajderPost,'kategorije'=>$kategorijeData]);
+        $najKomentari = $this->komentarModel->GetNajkomentarisanije();
+
+        return view('Pages/stranaOdredjeneKategorije',['postovi'=>$postovi,'slajderData'=>$slajderPost,'kategorije'=>$kategorijeData,'najkomentarisanije'=>$najKomentari]);
     }
 
 

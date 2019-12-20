@@ -36,4 +36,21 @@ class KomentarModel extends Model
             \Log::info("Greska pri insertu komentara ". $e->getMessage());
         }
     }
+
+    public function GetNajkomentarisanije()
+    {
+        try{
+            return \DB::table('komentar as kom')
+            ->join('post as p','p.idPost','=','kom.postId')
+            ->join('slika as s','s.idSlika','=','p.slikaId')
+            ->select('p.idPost','p.naslov','s.putanja','kom.postId','s.create_on')
+            ->groupBy('kom.postId','p.idPost','p.naslov','s.putanja','s.create_on')
+            ->orderBy(\DB::raw('count(*)'),'DESC')
+            ->get();
+
+        }catch(\Throwable $e)
+        {
+            \Log::info("Greska pri dohvatanju komentara ". $e->getMessage());
+        }
+    }
 }

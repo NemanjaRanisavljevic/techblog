@@ -35,8 +35,9 @@ class SinglePostController extends Controller
         }else
         {
             $komentari = $this->postModel->GetKomentari($request->id);
+            $najKomentari = $this->komentarModel->GetNajkomentarisanije();
             
-            return view('Pages/singlePost',['kategorije'=>$kategorijeData,'infoPost'=>$postData,'komentari'=>$komentari]);
+            return view('Pages/singlePost',['kategorije'=>$kategorijeData,'infoPost'=>$postData,'komentari'=>$komentari,'najkomentarisanije'=>$najKomentari]);
         }
        
        } catch (QueryException $e) {

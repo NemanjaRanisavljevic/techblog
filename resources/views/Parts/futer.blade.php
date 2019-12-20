@@ -88,6 +88,7 @@
 <script src="{{asset('/')}}jsProvera/registracija.js"></script>
 <script src="{{asset('/')}}jsProvera/post.js"></script>
 <script src="{{asset('/')}}jsProvera/slajderJs.js"></script>
+<script src="{{asset('/')}}jsProvera/kontakt.js"></script>
 
 </body>
 </html>
