@@ -54,7 +54,7 @@ $(document).ready(function() {
 
 $(".linkSlajder").click(function () {
     var idKategorije = $(this).attr('data-id');
-    
+   
     $.ajax({
         url: baseUrl + '/kat-nav/id',
         type:'GET',

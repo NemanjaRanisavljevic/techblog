@@ -21,3 +21,7 @@ Route::get('/kat-all/{id}','IndexController@GetSvihPostovaZaKategoriju')->name('
 
 Route::post('/komentar','SinglePostController@InsertKomentara');
 Route::post('/kontakt','KontaktController@SlanjeEmaila')->name('kontakt');
+
+
+Route::get('/admin','RegistracijaController@AdminPrikazKorisnika')->name('korisnici');
+Route::put('/admin/{id}','RegistracijaController@BrisanjeKorisnika');

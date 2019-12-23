@@ -27,7 +27,7 @@
 
                                             @switch($loop->index)
                                                 @case(0)
-                                                <button class="tablinks active linkSlajder" data-id="{{$kategorije[0]->idKategorija}}">
+                                                <button class="tablinks linkSlajder" data-id="{{$kategorije[0]->idKategorija}}">
                                                     @break
                                                 @default
                                                 <button class="tablinks linkSlajder" data-id="{{$k->idKategorija}}">

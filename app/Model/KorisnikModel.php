@@ -5,6 +5,7 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\QueryException;
 
+
 class KorisnikModel extends Model
 {
     public $ime;
@@ -15,6 +16,20 @@ class KorisnikModel extends Model
     public $token;
     public $slikaIme;
 
+    public function GetAllKorisnik()
+    {
+        try{
+            return \DB::table("korisnik as k")
+            ->join("pol as p","p.idPol","=","k.polId")
+            ->join("uloga as u","u.idUloga","=","k.ulogaId")
+            ->join("slika as s","s.idSlika","=","k.slikaId")
+            ->where("k.delete_on",null)
+            ->get();
+        }catch(\Throwable $e)
+        {
+            \Log::info("Greska pri dohvatanju korisnika". $e->getMessage());
+        }
+    }
 
     public function InsertKorisnik()
     {
@@ -74,5 +89,19 @@ class KorisnikModel extends Model
                 ['aktivan',1]
             ])
             ->first();
+    }
+
+    public function BrisanjeKorisnika($id,$date)
+    {
+        
+        try{
+            \DB::table('korisnik')
+            ->where('idKorisnik', $id)
+            ->update(['delete_on' => $date]);
+            
+        }catch (QueryException $e)
+        {
+            \Log::info("Brisanje korisnika. ".$e->getMessage());
+        }
     }
 }

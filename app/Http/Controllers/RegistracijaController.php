@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+Use \Carbon\Carbon;
+
 
 class RegistracijaController extends Controller
 {
@@ -23,6 +25,12 @@ class RegistracijaController extends Controller
     public function __construct()
     {
         $this->korisnikModel = new KorisnikModel();
+    }
+
+    public function AdminPrikazKorisnika()
+    {
+        $korisnici = $this->korisnikModel->GetAllKorisnik();
+        return view('Pages/admin/pocetna',['korisnici'=>$korisnici]);
     }
 
     public function RegistracijaPrikaz()
@@ -138,6 +146,21 @@ class RegistracijaController extends Controller
     {
         $request->session()->forget('korisnik');   
         return redirect()->route('index');
+    }
+
+    public function BrisanjeKorisnika(Request $request)
+    {
+        try{
+            $date = Carbon::now();
+            
+            $this->korisnikModel->BrisanjeKorisnika($request->id,$date);
+            abort(204);
+
+        }catch (QueryException $e)
+        {
+            \Log::info("Greska pri brisanju korisnika.". $e->getMessage());
+        }
+        
     }
 
 }
