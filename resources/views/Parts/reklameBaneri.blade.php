@@ -1,11 +1,22 @@
 <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
     <div class="sidebar">
         <div class="widget">
-            <div class="banner-spot clearfix">
-                <div class="banner-img">
-                    <img src="{{asset('/')}}upload/banner_07.jpg" alt="" class="img-fluid">
-                </div><!-- end banner-img -->
-            </div><!-- end banner -->
+            <h2 class="widget-title">Kategorije</h2>
+            <div class="blog-list-widget">
+                
+                        <div class="w-100 justify-content-between">
+                            
+                            <div class="link-widget">
+                                <ul>
+                                @foreach($kategorije as $kateBroj)
+                                    <li><a href="{{route('kat-all',['id'=>$kateBroj->idKategorija])}}">{{$kateBroj->nazivKategorije}} <span>({{$kateBroj->brojPostova}})</span></a></li>
+                                @endforeach
+                                </ul>
+                            </div><!-- end link-widget -->
+                        </div>
+                    </a>
+                
+            </div><!-- end blog-list -->
         </div><!-- end widget -->
 
         <div class="widget">
@@ -33,27 +44,7 @@
             </div><!-- end blog-list -->
         </div><!-- end widget -->
 
-        <div class="widget">
-            <h2 class="widget-title">Recent Reviews</h2>
-            <div class="blog-list-widget">
-                <div class="list-group">
-                    <a href="tech-single.html" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="w-100 justify-content-between">
-                            <img src="{{asset('/')}}upload/tech_blog_02.jpg" alt="" class="img-fluid float-left">
-                            <h5 class="mb-1">Banana-chip chocolate cake recipe..</h5>
-                            <span class="rating">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </span>
-                        </div>
-                    </a>
-                
-                </div>
-            </div><!-- end blog-list -->
-        </div><!-- end widget -->
+        
 
        
     </div><!-- end sidebar -->

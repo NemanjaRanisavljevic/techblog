@@ -9,7 +9,7 @@
         </div>
 
         <div class="list-group list-group-flush">
-            <a href="{{route('korisnici')}}" class="list-group-item list-group-item-action bg-light">Korisnici</a>
+            <a href="{{route('admin-panel')}}" class="list-group-item list-group-item-action bg-light">Korisnici</a>
 
         </div>
     </div>

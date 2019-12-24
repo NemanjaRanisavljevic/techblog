@@ -63,6 +63,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('post')}}">Kreiranje objave</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('admin-panel')}}">Admin panel</a>
+                            </li>
                         @else
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('registracija')}}">Registracija</a>

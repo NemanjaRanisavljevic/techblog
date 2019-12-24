@@ -23,5 +23,5 @@ Route::post('/komentar','SinglePostController@InsertKomentara');
 Route::post('/kontakt','KontaktController@SlanjeEmaila')->name('kontakt');
 
 
-Route::get('/admin','RegistracijaController@AdminPrikazKorisnika')->name('korisnici');
+Route::get('/admin','RegistracijaController@AdminPrikazKorisnika')->name('admin-panel');
 Route::put('/admin/{id}','RegistracijaController@BrisanjeKorisnika');

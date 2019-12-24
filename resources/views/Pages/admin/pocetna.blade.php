@@ -40,10 +40,10 @@
                             <td>{{$kor->aktivan}}</td>
                             <td>@if($kor->idPol == 1)  {{"musko"}}@else {{"zensko"}}@endif</td>
                             <td><img  class="slikaKorisnika" src="{{asset("upload/"."$kor->putanja")}}" alt="{{$kor->ime}}"/></td>
-                            <td><button type="button" class="btnEditKorisnika" data-id="{{$kor->idKorisnik}}">
+                            <td><button type="button" data-toggle="modal" data-target="#modalEditKorisnika" class="btnEditKorisnika btn btn-primary" data-id="{{$kor->idKorisnik}}">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                            <td><button type="button" class="btnBrisanjeKorisnika" data-id="{{$kor->idKorisnik}}">
+                            <td><button type="button" class="btnBrisanjeKorisnika btn btn-danger" data-id="{{$kor->idKorisnik}}">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </td>
@@ -52,54 +52,130 @@
                     </tbody>
                 </table>
             </form>
-            <div class="col-lg-10 offset-lg-1">
-                <div class="contact-form-warp">
-                    <div class="section-title">
-                        <h2>Izmeni Korisnika</h2>
-                    </div>
-                    <!-- contact form -->
-                    <form class="contact-form" action="" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <div class="row">
-                            <div class="col-md-12">
-                                <input type="text" name="ime" id="ime" placeholder="Ime">
-                                <input type="text" name="prezime" id="prezime" placeholder="Prezime">
-                                <input type="text" name="email" id="email" placeholder="E-mail">
-                                <input type="password" name="sifra" id="sifra" placeholder="Sifra">
-                                <input type="hidden"  name="skrivnoId" id="skrivnoId">
-                                <select class="custom-select" id="ddlAktivan" name="ddlAktivan">
-                                    <option selected value="0">Nije Aktivan</option>
-                                        <option value="1">Aktivan</option>
-                                </select>
-                                <select class="custom-select" id="ddlUloga" name="ddlUloga">
-                                    <option selected value="0">Izaberi Ulogu</option>
-                                    
-                                    
-                                    
-                                </select>
-                                <select class="custom-select" id="ddlPol" name="ddlPol">
-                                    <option selected value="0">Izaberi Pol</option>
-                                    
-                                    <option value=""></option>
-                                       
-                                </select>
-                                <div class="text-center">
-                                    <button type="submit" name="btnUpdateJela" id="btnUpdateJela" class="site-btn">Dodaj</button>
-                                </div>
-                            </div>
+            <div class="text-left">
+                <button type="button" data-toggle="modal" data-target="#modalAddKorisnika" id="btnLog" class="btn btn-primary">Dodaj</button>
+            </div>
 
+             <!-- Modal Edit -->
+             <div class="modal fade" id="modalEditKorisnika" tabindex="-1" role="dialog" aria-labelledby="modalEditKorisnika" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalEditKorisnika">Izmena Korisnika</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                    </form>
-                    <div class="ispisGresaka">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+                        <div class="modal-body">
+                            <form class="contact-form" action="" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="text" name="ime" id="ime" placeholder="Ime">
+                                        <input type="text" name="prezime" id="prezime" placeholder="Prezime">
+                                        <input type="text" name="email" id="email" placeholder="E-mail">
+                                        <input type="password" name="sifra" id="sifra" placeholder="Sifra">
+                                        <input type="hidden"  name="skrivnoId" id="skrivnoId">
+                                        <select class="custom-select" id="ddlAktivan" name="ddlAktivan">
+                                            <option selected value="0">Nije Aktivan</option>
+                                                <option value="1">Aktivan</option>
+                                        </select>
+                                        <select class="custom-select" id="ddlUloga" name="ddlUloga">
+                                            <option selected value="0">Izaberi Ulogu</option>
+                                            
+                                            
+                                            
+                                        </select>
+                                        <select class="custom-select" id="ddlPol" name="ddlPol">
+                                            <option selected value="0">Izaberi Pol</option>
+                                            
+                                            <option value=""></option>
+                                               
+                                        </select>
+                                    </div>
+        
+                                </div>
+                            </form>
+                            <div class="ispisGresaka">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
+                            <button type="button" id="btnLog" class="btn btn-success">Izmeni</button>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- kraj -->
+
+
+            <!-- Modal Add -->
+            <div class="modal fade" id="modalAddKorisnika" tabindex="-1" role="dialog" aria-labelledby="modalAddKorisnika" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalAddKorisnika">Dodaj Korisnika</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="contact-form" action="" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="text" name="ime" id="ime" placeholder="Ime">
+                                        <input type="text" name="prezime" id="prezime" placeholder="Prezime">
+                                        <input type="text" name="email" id="email" placeholder="E-mail">
+                                        <input type="password" name="sifra" id="sifra" placeholder="Sifra">
+                                        <input type="hidden"  name="skrivnoId" id="skrivnoId">
+                                        <select class="custom-select" id="ddlAktivan" name="ddlAktivan">
+                                            <option selected value="0">Nije Aktivan</option>
+                                                <option value="1">Aktivan</option>
+                                        </select>
+                                        <select class="custom-select" id="ddlUloga" name="ddlUloga">
+                                            <option selected value="0">Izaberi Ulogu</option>
+                                            
+                                            
+                                            
+                                        </select>
+                                        <select class="custom-select" id="ddlPol" name="ddlPol">
+                                            <option selected value="0">Izaberi Pol</option>
+                                            
+                                            <option value=""></option>
+                                               
+                                        </select>
+                                    </div>
+        
+                                </div>
+                            </form>
+                            <div class="ispisGresaka">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
+                            <button type="button" id="btnLog" class="btn btn-success">Dodaj</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- kraj -->
+
+           
 
         </div>
     </section>
