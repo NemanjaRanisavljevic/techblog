@@ -158,4 +158,95 @@ function proveraRegistracije(){
 
 };
 
+function proveraDodavanjaKorisnika(){
+
+    var ime = $("#imeAdd").val();
+    var prezime = $("#prezimeAdd").val();
+    var sifra = $("#sifraAdd").val();
+    var email = $("#emailAdd").val();
+    var pol = $("#ddlPolAdd").val();
+    var slika = $("#slikaPostaAdd").val();
+    var uloga = $('#ddlUlogaAdd').val();
+
+    var regIme =/^[A-ZČĆŽŠĐ][a-zčćžšđ]{2,10}$/;
+    var regPrezime =/^[A-ZČĆŽŠĐ][a-zčćžšđ]{2,15}$/;
+    var regSifra =/^[A-Z][\w\d]{5,}$/;
+
+    var greske = Array();
+    if(!regIme.test(ime))
+    {
+        $("#imeAdd").css({"border-color":"red"});
+        $("#imeAdd").focus(function(){
+            $("#imeAdd").css({"border-color":"#dadada"})
+        });
+        $.notify("Niste dobro uneli Ime!","error");
+        greske.push("Greska ime");
+    }
+
+    if(!regPrezime.test(prezime))
+    {
+        $("#prezimeAdd").css({"border-color":"red"});
+        $("#prezimeAdd").focus(function(){
+            $("#prezimeAdd").css({"border-color":"#dadada"})
+        });
+        $.notify("Niste dobro uneli Prezime!","error");
+        greske.push("Greska Prezime");
+    }
+
+    if(!regSifra.test(sifra))
+    {
+        $("#sifraAdd").css({"border-color":"red"});
+        $("#sifraAdd").focus(function(){
+            $("#sifraAdd").css({"border-color":"#dadada"})
+        });
+        $.notify("Niste dobro uneli Sifru!","error");
+        greske.push("Greska sifra");
+    }
+
+    if(email == "")
+    {
+        $("#emailAdd").css({"border-color":"red"});
+        $("#emailAdd").focus(function(){
+            $("#emailAdd").css({"border-color":"#dadada"})
+        });
+        $.notify("Polje za Email je obavezno!","error");
+        greske.push("Greska email");
+    }
+    if(uloga==0)
+    {
+        $("#ddlUlogaAdd").css({"border-color":"red"});
+        $("#ddlUlogaAdd").focus(function(){
+            $("#ddlUlogaAdd").css({"border-color":"#dadada"})
+        });
+        $.notify("Morate izabrati ulogu!","error");
+        greske.push("Greska pol");
+    }
+
+    if(pol==0)
+    {
+        $("#ddlPolAdd").css({"border-color":"red"});
+        $("#ddlPolAdd").focus(function(){
+            $("#ddlPolAdd").css({"border-color":"#dadada"})
+        });
+        $.notify("Morate izabrati Pol!","error");
+        greske.push("Greska pol");
+    }
+
+    if(slika == " ")
+    {
+        $.notify("Morate izabrati vasu sliku!","error");
+        greske.push("Greska pol");
+    }
+
+    if(greske.length == 0)
+    {
+        
+        return true;
+    }else
+    {
+        return false;
+    }
+
+};
+
 

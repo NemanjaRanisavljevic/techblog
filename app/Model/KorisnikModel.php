@@ -15,6 +15,8 @@ class KorisnikModel extends Model
     public $pol;
     public $token;
     public $slikaIme;
+    public $aktivan;
+    public $ulodaId;
 
     public function GetAllKorisnik()
     {
@@ -24,6 +26,24 @@ class KorisnikModel extends Model
             ->join("uloga as u","u.idUloga","=","k.ulogaId")
             ->join("slika as s","s.idSlika","=","k.slikaId")
             ->where("k.delete_on",null)
+            ->get();
+        }catch(\Throwable $e)
+        {
+            \Log::info("Greska pri dohvatanju korisnika". $e->getMessage());
+        }
+    }
+
+    public function GetIdKorisnik($id)
+    {
+        try{
+            return \DB::table("korisnik as k")
+            ->join("pol as p","p.idPol","=","k.polId")
+            ->join("uloga as u","u.idUloga","=","k.ulogaId")
+            ->join("slika as s","s.idSlika","=","k.slikaId")
+            ->where([
+                ["k.delete_on","=",null],
+                ["k.idKorisnik","=",$id]
+            ])
             ->get();
         }catch(\Throwable $e)
         {
@@ -102,6 +122,37 @@ class KorisnikModel extends Model
         }catch (QueryException $e)
         {
             \Log::info("Brisanje korisnika. ".$e->getMessage());
+        }
+    }
+
+    public function InsertKorisnikAdmin()
+    {
+        try
+        {
+            \DB::transaction(function(){
+                
+                $slikaId = \DB::table("slika")->insertGetId([
+                    "putanja" => $this->slikaIme,
+                    "alt"=> $this->ime
+                ]);
+
+                \DB::table("korisnik")->insert([
+                    "ime" => $this->ime,
+                    "prezime" => $this->prezime,
+                    "email" => $this->email,
+                    "sifra" => $this->sifra,
+                    "token" => $this->token,
+                    "polId" => $this->pol,
+                    "ulogaId" => $this->ulodaId,
+                    "aktivan" => $this->aktivan,
+                    "slikaId" => $slikaId
+
+                ]);
+            });
+
+        }catch (\Throwable $e)
+        {
+            \Log::info("Greska pri insertu korisnika". $e->getMessage());
         }
     }
 }

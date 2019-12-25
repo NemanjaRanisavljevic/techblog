@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LogovanjeValidacija;
 use App\Http\Requests\ValidacijaRegistracija;
+use App\Http\Requests\AdminAddValidacija;
 use App\Model\KorisnikModel;
 use App\Model\KategorijeModel;
 use App\Model\PolModel;
+use App\Model\UlogaModel;
 use Facade\FlareClient\Http\Exceptions\NotFound;
 use http\Client\Response;
 use Illuminate\Database\QueryException;
@@ -21,23 +23,96 @@ Use \Carbon\Carbon;
 class RegistracijaController extends Controller
 {
     private $korisnikModel;
+    private $polModel;
+    private $ulogaModel;
 
     public function __construct()
     {
         $this->korisnikModel = new KorisnikModel();
+        $this->polModel = new PolModel();
+        $this->ulogaModel = new UlogaModel();
     }
 
     public function AdminPrikazKorisnika()
     {
         $korisnici = $this->korisnikModel->GetAllKorisnik();
-        return view('Pages/admin/pocetna',['korisnici'=>$korisnici]);
+        $polovi = $this->polModel->GetPol();
+        $uloge =  $this->ulogaModel->GetAll();
+        
+        return view('Pages/admin/pocetna',['korisnici'=>$korisnici,'polovi'=>$polovi,'uloge'=>$uloge]);
+    }
+
+    public function GetKorisnikId(Request $request)
+    {
+        $korisnik = $this->korisnikModel->GetIdKorisnik($request->id);
+        return $korisnik;
+    }
+    
+    public function AdminAddKorisnika(AdminAddValidacija $request)
+    {
+        
+        $slika = $request->file("slikaKorisnikaAdminAdd");
+        $slikaIme = $slika->getClientOriginalName();
+        $slikaIme = time()."_".$slikaIme;
+
+        public_path("upload");
+
+
+        try
+        {
+            $slika->move(public_path("upload"),$slikaIme);
+
+            $this->korisnikModel->ime = $request->imeAdd;
+            $this->korisnikModel->prezime = $request->prezimeAdd;
+            $this->korisnikModel->email = $request->emailAdd;
+            $this->korisnikModel->sifra = md5($request->sifraAdd);
+            $this->korisnikModel->pol = $request->ddlPolAdd;
+            $this->korisnikModel->slikaIme = $slikaIme;
+            $token =  md5($request->emailAdd);
+            $this->korisnikModel->token =  $token;
+            $this->korisnikModel->aktivan = $request->ddlAktivanAdd;
+            $this->korisnikModel->ulodaId = $request->ddlUlogaAdd;
+
+            $this->korisnikModel->InsertKorisnikAdmin();
+
+            $mail = new PHPMailer(true);
+            try
+            {
+                $mail->SMTPDebug = 0;
+                //$mail->SMTPDebug = SMTP::DEBUG_SERVER;  
+                $mail->SMTPOptions = array('ssl' => array('verify_peer' => false, 'verify_peer_name' => false,'allow_self_signed' => true));
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';  // backup
+                $mail->SMTPAuth = true;
+                $mail->Username = 'nemanjaranisavljevicsajt@gmail.com';
+                $mail->Password = 'nemanja@123456';
+                $mail->SMTPSecure = 'tls'; // tls enkripcija (moze i ssl)
+                $mail->Port = 587;
+                $mail->setFrom('nemanjaranisavljevicsajt@gmail.com', 'Tech-Blog registracija.');
+                $mail->addAddress($request->emailAdd);
+                // content
+                $mail->isHTML(true);
+                $mail->Subject = 'Kreiranje nalog!';
+                $mail->Body = 'Vasa sifra je '.$request->sifraAdd;
+                //PROMENJENO NA SERVERU POTANJA
+                $mail->send();
+
+            }catch(QueryException $e)
+            {
+                \Log::info("Mail za Aktivaciju nije poslat!". $e->getMessage());
+            }
+
+            return redirect()->back();
+
+        }catch(QueryException $e)
+        {
+            \Log::info("Mail za Aktivaciju nije poslat!". $e->getMessage());
+        }
     }
 
     public function RegistracijaPrikaz()
-    {
-        
-        $polModel = new PolModel();
-        $polovi = $polModel->GetPol();
+    {  
+        $polovi = $this->polModel->GetPol();
 
         $kategorijaModel = new KategorijeModel();
         $kategorijeData = $kategorijaModel->GetKategorije();
@@ -53,7 +128,6 @@ class RegistracijaController extends Controller
 
         public_path("upload");
 
-        
 
         try
         {

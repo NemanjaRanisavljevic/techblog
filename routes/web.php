@@ -24,4 +24,6 @@ Route::post('/kontakt','KontaktController@SlanjeEmaila')->name('kontakt');
 
 
 Route::get('/admin','RegistracijaController@AdminPrikazKorisnika')->name('admin-panel');
+Route::get('/admin/{id}','RegistracijaController@GetKorisnikId');
+Route::post('/admin','RegistracijaController@AdminAddKorisnika');
 Route::put('/admin/{id}','RegistracijaController@BrisanjeKorisnika');

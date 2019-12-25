@@ -13,6 +13,7 @@
 <script src="{{asset("vendor/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
 
 <script src="{{asset('/')}}jsProvera/adminJs/adminBrisanje.js"></script>
+<script src="{{asset('/')}}jsProvera/registracija.js"></script>
 <script src="{{asset('/')}}plugin/notify.min.js"></script>
 <script src="{{asset('/')}}plugin/notifySettings.js"></script>
 

@@ -53,7 +53,7 @@
                 </table>
             </form>
             <div class="text-left">
-                <button type="button" data-toggle="modal" data-target="#modalAddKorisnika" id="btnLog" class="btn btn-primary">Dodaj</button>
+                <button type="button" data-toggle="modal" data-target="#modalAddKorisnika"  class="btn btn-primary">Dodaj</button>
             </div>
 
              <!-- Modal Edit -->
@@ -67,36 +67,47 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form class="contact-form" action="" method="POST">
+                        <form class="contact-form" action="{{route('admin-panel')}}" method="POST" onsubmit="return proveraDodavanjaKorisnika()" enctype='multipart/form-data'>
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input type="text" name="ime" id="ime" placeholder="Ime">
-                                        <input type="text" name="prezime" id="prezime" placeholder="Prezime">
-                                        <input type="text" name="email" id="email" placeholder="E-mail">
-                                        <input type="password" name="sifra" id="sifra" placeholder="Sifra">
-                                        <input type="hidden"  name="skrivnoId" id="skrivnoId">
-                                        <select class="custom-select" id="ddlAktivan" name="ddlAktivan">
+                                        <input type="text" name="imeEdit" id="imeEdit" placeholder="Ime">
+                                        <input type="text" name="prezimeEdit" id="prezimeEdit" placeholder="Prezime">
+                                        <input type="text" name="emailEdit" id="emailEdit" placeholder="E-mail">
+                                        <input type="password" name="sifraEdit" id="sifraEdit" placeholder="Sifra">
+                                        <div class="input-group mb-3">
+                                            <div class="custom-file">
+                                                <input type="file" name="slikaKorisnikaAdminEdit" class="custom-file-input" id="slikaKorisnikaAdminEdit">
+                                                <label class="custom-file-label" for="slikaKorisnikaAdminEdit" aria-describedby="inputGroupFileAddon02">Izaberi sliku</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="slikaKorisnikaAdminEdit">Upload</span>
+                                            </div>
+                                        </div> 
+                                        
+                                        <select class="custom-select" id="ddlAktivanEdit" name="ddlAktivanEdit">
                                             <option selected value="0">Nije Aktivan</option>
                                                 <option value="1">Aktivan</option>
                                         </select>
-                                        <select class="custom-select" id="ddlUloga" name="ddlUloga">
+                                        <select class="custom-select" id="ddlUlogaEdit" name="ddlUlogaEdit">
                                             <option selected value="0">Izaberi Ulogu</option>
-                                            
-                                            
+                                            @foreach($uloge as $uloga)
+                                            <option value="{{$uloga->IdUloga}}">{{$uloga->naziv}}</option>
+                                            @endforeach
                                             
                                         </select>
-                                        <select class="custom-select" id="ddlPol" name="ddlPol">
+                                        <select class="custom-select" id="ddlPolEdit" name="ddlPolEdit">
                                             <option selected value="0">Izaberi Pol</option>
-                                            
-                                            <option value=""></option>
+                                            @foreach($polovi as $pol)
+                                            <option value="{{$pol->idPol}}">{{$pol->naziv}}</option>
+                                            @endforeach
                                                
                                         </select>
                                     </div>
         
                                 </div>
-                            </form>
+                            
                             <div class="ispisGresaka">
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -107,8 +118,9 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
-                            <button type="button" id="btnLog" class="btn btn-success">Izmeni</button>
+                            <button type="submit" id="btnEditUser" class="btn btn-success">Izmeni</button>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -127,36 +139,46 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form class="contact-form" action="" method="POST">
+                            <form class="contact-form" action="{{route('admin-panel')}}" method="POST" onsubmit="return proveraDodavanjaKorisnika()" enctype='multipart/form-data'>
                                 @csrf
-                                @method('PUT')
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <input type="text" name="ime" id="ime" placeholder="Ime">
-                                        <input type="text" name="prezime" id="prezime" placeholder="Prezime">
-                                        <input type="text" name="email" id="email" placeholder="E-mail">
-                                        <input type="password" name="sifra" id="sifra" placeholder="Sifra">
-                                        <input type="hidden"  name="skrivnoId" id="skrivnoId">
-                                        <select class="custom-select" id="ddlAktivan" name="ddlAktivan">
+                                        <input type="text" name="imeAdd" id="imeAdd" placeholder="Ime">
+                                        <input type="text" name="prezimeAdd" id="prezimeAdd" placeholder="Prezime">
+                                        <input type="text" name="emailAdd" id="emailAdd" placeholder="E-mail">
+                                        <input type="password" name="sifraAdd" id="sifraAdd" placeholder="Sifra">
+                                        <div class="input-group mb-3">
+                                            <div class="custom-file">
+                                                <input type="file" name="slikaKorisnikaAdminAdd" class="custom-file-input" id="slikaKorisnikaAdminAdd">
+                                                <label class="custom-file-label" for="slikaKorisnikaAdminAdd" aria-describedby="inputGroupFileAddon02">Izaberi sliku</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="slikaKorisnikaAdminAdd">Upload</span>
+                                            </div>
+                                        </div> 
+                                        
+                                        <select class="custom-select" id="ddlAktivanAdd" name="ddlAktivanAdd">
                                             <option selected value="0">Nije Aktivan</option>
                                                 <option value="1">Aktivan</option>
                                         </select>
-                                        <select class="custom-select" id="ddlUloga" name="ddlUloga">
+                                        <select class="custom-select" id="ddlUlogaAdd" name="ddlUlogaAdd">
                                             <option selected value="0">Izaberi Ulogu</option>
-                                            
-                                            
+                                            @foreach($uloge as $uloga)
+                                            <option value="{{$uloga->IdUloga}}">{{$uloga->naziv}}</option>
+                                            @endforeach
                                             
                                         </select>
-                                        <select class="custom-select" id="ddlPol" name="ddlPol">
+                                        <select class="custom-select" id="ddlPolAdd" name="ddlPolAdd">
                                             <option selected value="0">Izaberi Pol</option>
-                                            
-                                            <option value=""></option>
+                                            @foreach($polovi as $pol)
+                                            <option value="{{$pol->idPol}}">{{$pol->naziv}}</option>
+                                            @endforeach
                                                
                                         </select>
                                     </div>
         
                                 </div>
-                            </form>
+                            
                             <div class="ispisGresaka">
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -167,8 +189,9 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
-                            <button type="button" id="btnLog" class="btn btn-success">Dodaj</button>
+                            <button type="submit" id="btnAddUser" class="btn btn-success">Dodaj</button>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
