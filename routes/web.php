@@ -27,3 +27,4 @@ Route::get('/admin','RegistracijaController@AdminPrikazKorisnika')->name('admin-
 Route::get('/admin/{id}','RegistracijaController@GetKorisnikId');
 Route::post('/admin','RegistracijaController@AdminAddKorisnika');
 Route::put('/admin/{id}','RegistracijaController@BrisanjeKorisnika');
+Route::put('/admin-edit','RegistracijaController@AdminEditKorinik')->name('admin-edit');

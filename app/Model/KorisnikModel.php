@@ -17,6 +17,8 @@ class KorisnikModel extends Model
     public $slikaIme;
     public $aktivan;
     public $ulodaId;
+    public $idKorisnika;
+    public $idSlika;
 
     public function GetAllKorisnik()
     {
@@ -153,6 +155,70 @@ class KorisnikModel extends Model
         }catch (\Throwable $e)
         {
             \Log::info("Greska pri insertu korisnika". $e->getMessage());
+        }
+    }
+
+    public function EditKorisnikaBezSifre()
+    {
+        try
+        {
+            \DB::transaction(function(){
+                
+                \DB::table("slika")
+                ->where('idSlika',$this->idSlika)
+                ->update([
+                    "putanja" => $this->slikaIme
+                    ]);
+
+                \DB::table('korisnik')
+                ->where('idKorisnik',$this->idKorisnika)
+                ->update([
+                    "ime" => $this->ime,
+                    "prezime" => $this->prezime,
+                    "email" => $this->email,
+                    "token" => $this->token,
+                    "polId" => $this->pol,
+                    "ulogaId" => $this->ulodaId,
+                    "aktivan" => $this->aktivan,
+                    "slikaId" => $this->idSlika
+                    ]);
+            });
+
+        }catch (\Throwable $e)
+        {
+            \Log::info("Greska pri editu korisnika". $e->getMessage());
+        }
+    }
+    public function EditKorisnikaSaSifre()
+    {
+        try
+        {
+            \DB::transaction(function(){
+                
+                \DB::table("slika")
+                ->where('idSlika',$this->idSlika)
+                ->update([
+                    "putanja" => $this->slikaIme
+                    ]);
+
+                \DB::table('korisnik')
+                ->where('idKorisnik',$this->idKorisnika)
+                ->update([
+                    "ime" => $this->ime,
+                    "prezime" => $this->prezime,
+                    "email" => $this->email,
+                    "sifra" => $this->sifra,
+                    "token" => $this->token,
+                    "polId" => $this->pol,
+                    "ulogaId" => $this->ulodaId,
+                    "aktivan" => $this->aktivan,
+                    "slikaId" => $this->idSlika
+                    ]);
+            });
+
+        }catch (\Throwable $e)
+        {
+            \Log::info("Greska pri editu korisnika". $e->getMessage());
         }
     }
 }

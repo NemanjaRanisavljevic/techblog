@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LogovanjeValidacija;
 use App\Http\Requests\ValidacijaRegistracija;
 use App\Http\Requests\AdminAddValidacija;
+use App\Http\Requests\AdminKorisnikEditValidacija;
 use App\Model\KorisnikModel;
 use App\Model\KategorijeModel;
 use App\Model\PolModel;
@@ -107,6 +108,61 @@ class RegistracijaController extends Controller
         }catch(QueryException $e)
         {
             \Log::info("Mail za Aktivaciju nije poslat!". $e->getMessage());
+        }
+    }
+
+    public function AdminEditKorinik(AdminKorisnikEditValidacija $request)
+    {
+        
+        $slika = $request->file("slikaKorisnikaAdminEdit");
+        $slikaIme = $slika->getClientOriginalName();
+        $slikaIme = time()."_".$slikaIme;
+        
+        public_path("upload");
+        try
+        {
+            $slika->move(public_path("upload"),$slikaIme);
+
+            if(empty($request->sifraEdit))
+            {
+                $this->korisnikModel->ime = $request->imeEdit;
+                $this->korisnikModel->prezime = $request->prezimeEdit;
+                $this->korisnikModel->email = $request->emailEdit;
+                $this->korisnikModel->pol = $request->ddlPolEdit;
+                $this->korisnikModel->slikaIme = $slikaIme;
+                $this->korisnikModel->aktivan = $request->ddlAktivanEdit;
+                $this->korisnikModel->ulodaId = $request->ddlUlogaEdit;
+                $this->korisnikModel->idKorisnika = $request->korisnikIdEdit;
+                $this->korisnikModel->idSlika = $request->slikaIdEdit;
+
+                $this->korisnikModel->EditKorisnikaBezSifre();
+                return redirect()->back()->with('uspesno','Uspesno ste izmenili korisnika.');
+                
+            }else
+            {
+                $request->validate([
+                    'sifraEdit' => 'required|regex:/^[A-Z][\w\d]{5,}$/'
+                ]);
+                $this->korisnikModel->ime = $request->imeEdit;
+                $this->korisnikModel->prezime = $request->prezimeEdit;
+                $this->korisnikModel->email = $request->emailEdit;
+                $this->korisnikModel->pol = $request->ddlPolEdit;
+                $this->korisnikModel->slikaIme = $slikaIme;
+                $this->korisnikModel->sifra = md5($request->sifraEdit);
+                $this->korisnikModel->aktivan = $request->ddlAktivanEdit;
+                $this->korisnikModel->ulodaId = $request->ddlUlogaEdit;
+                $this->korisnikModel->idKorisnika = $request->korisnikIdEdit;
+                $this->korisnikModel->idSlika = $request->slikaIdEdit;
+
+                $this->korisnikModel->EditKorisnikaSaSifre();
+                return redirect()->back()->with('uspesno','Uspesno ste izmenili korisnika.');
+
+            }
+
+
+        }catch(QueryException $e){
+
+            \Log::info("Edit korisnika!". $e->getMessage());
         }
     }
 

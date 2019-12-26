@@ -52,14 +52,17 @@ $(".btnEditKorisnika").click(function () {
             id:idKorisnika
         },
         success:function (data) {
-            
+            $("#korisnikIdEdit").val(idKorisnika);
+            $("#imeEdit").val(data[0].ime);
             $("#imeEdit").val(data[0].ime);
             $("#prezimeEdit").val(data[0].prezime);
             $("#emailEdit").val(data[0].email);
             $("#ddlPolEdit").val(data[0].idPol);
             $("#slikaPostaEdit").val(data[0].putanja);
+            $("#slikaIdEdit").val(data[0].idSlika);
             $('#ddlUlogaEdit').val(data[0].IdUloga);
             $('#ddlAktivanEdit').val(data[0].aktivan);
+            
         },
         error(xhr)
         {

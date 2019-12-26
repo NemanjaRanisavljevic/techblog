@@ -67,7 +67,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                        <form class="contact-form" action="{{route('admin-panel')}}" method="POST" onsubmit="return proveraDodavanjaKorisnika()" enctype='multipart/form-data'>
+                        <form class="contact-form" action="{{route('admin-edit')}}" method="POST" enctype='multipart/form-data'>
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
@@ -85,7 +85,8 @@
                                                 <span class="input-group-text" id="slikaKorisnikaAdminEdit">Upload</span>
                                             </div>
                                         </div> 
-                                        
+                                        <input type="hidden" value="" name="slikaIdEdit" id="slikaIdEdit">
+                                        <input type="hidden" value="" name="korisnikIdEdit" id="korisnikIdEdit">
                                         <select class="custom-select" id="ddlAktivanEdit" name="ddlAktivanEdit">
                                             <option selected value="0">Nije Aktivan</option>
                                                 <option value="1">Aktivan</option>
@@ -118,7 +119,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
-                            <button type="submit" id="btnEditUser" class="btn btn-success">Izmeni</button>
+                            <button type="submit"  class="btn btn-success">Izmeni</button>
                         </div>
                         </form>
                     </div>
