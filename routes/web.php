@@ -28,3 +28,6 @@ Route::get('/admin/{id}','RegistracijaController@GetKorisnikId');
 Route::post('/admin','RegistracijaController@AdminAddKorisnika');
 Route::put('/admin/{id}','RegistracijaController@BrisanjeKorisnika');
 Route::put('/admin-edit','RegistracijaController@AdminEditKorinik')->name('admin-edit');
+
+Route::get('/admin-kategorije','AdminController@AdminPrikazKategorija')->name('admin-kategorije');
+Route::post('/admin-kategorije','AdminController@AdminAddKategorije');
