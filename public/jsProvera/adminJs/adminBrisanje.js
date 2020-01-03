@@ -42,6 +42,40 @@ $(".btnBrisanjeKorisnika").click(function () {
 
 });
 
+$(".btnBrisanjeKategorija").click(function () {
+    var idKategorije = $(this).attr('data-id');
+    
+    $.ajax({
+        url: baseUrl + '/admin-kategorije/id',
+        type:'POST',
+        data:{
+            id:idKategorije
+        },
+        success:function (data) {
+            
+            location.reload(true); 
+        },
+        error(xhr)
+        {
+            var status=xhr.status;
+            switch(status)
+            {
+                case 500:
+                    console.log("Greska na serveru.");
+                    break;
+                case 404:
+                    console.log("Nije pronadjena stranica");
+                    break;
+                case 422:
+                    $.notify("Nije moguce obrisati kategoriju postoje objave!","error");
+                    break;
+            }
+
+        }
+    });
+
+});
+
 $(".btnEditKorisnika").click(function () {
     var idKorisnika = $(this).attr('data-id');
     
@@ -63,6 +97,38 @@ $(".btnEditKorisnika").click(function () {
             $('#ddlUlogaEdit').val(data[0].IdUloga);
             $('#ddlAktivanEdit').val(data[0].aktivan);
             
+        },
+        error(xhr)
+        {
+            
+            var status=xhr.status;
+            switch(status)
+            {
+                case 500:
+                    console.log("Greska na serveru.");
+                    break;
+                case 404:
+                    console.log("Nije pronadjena stranica");
+                    break;
+            }
+
+        }
+    });
+
+});
+
+$(".btnEditKategorije").click(function () {
+    var idKategorije = $(this).attr('data-id');
+    
+    $.ajax({
+        url: baseUrl + '/admin-kategorije/id',
+        type:'GET',
+        data:{
+            id:idKategorije
+        },
+        success:function (data) {          
+            $("#kategorijaEditId").val(idKategorije);
+            $("#nazivEditKategorije").val(data[0].nazivKategorije);
         },
         error(xhr)
         {

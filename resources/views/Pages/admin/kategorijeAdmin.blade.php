@@ -29,16 +29,16 @@
                             <td>{{$item->idKategorija}}</td>
                             <td>{{$item->nazivKategorije}}</td>
                             <td>{{$item->brojPostova}}</td>
-                            <td><button type="button" data-toggle="modal" data-target="#modalEditKategorija" class="btnEditKorisnika btn btn-primary" data-id="{{$item->idKategorija}}">
+                            <td><button type="button" data-toggle="modal" data-target="#modalEditKategorija" class="btn btn-primary btnEditKategorije" data-id="{{$item->idKategorija}}">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                            <td><button type="button" class="btnBrisanjeKorisnika btn btn-danger" data-id="{{$item->idKategorija}}">
+                            <td><button type="button" class="btnBrisanjeKategorija btn btn-danger" data-id="{{$item->idKategorija}}">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </td>
                         </tr>
                     @endforeach
-                       {{-- ovde ispis --}}
+                       
                     </tbody>
                 </table>
             </form>
@@ -57,7 +57,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                        <form class="contact-form" action="{{route('admin-kategorije')}}" method="POST">
+                        <form class="contact-form" action="{{route('admin-kategorije')}}" onsubmit="return EditovanjeKategorije()" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
@@ -77,7 +77,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
-                            <button type="submit"  class="btn btn-success">Izmeni</button>
+                            <button type="submit" class="btn btn-success">Izmeni</button>
                         </div>
                         </form>
                     </div>

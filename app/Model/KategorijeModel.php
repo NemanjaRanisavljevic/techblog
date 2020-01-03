@@ -30,4 +30,42 @@ class KategorijeModel extends Model
         }
     }
 
+    public function GetIdKategorije($id)
+    {
+        return \DB::table("kategorija")
+        ->where('idKategorija',$id)
+        ->get();
+    }
+
+    public function EditKategorije($naziv,$id)
+    {
+        try
+        {
+                \DB::table('kategorija')
+                ->where('idKategorija',$id)
+                ->update([
+                    "nazivKategorije" => $naziv
+                    ]);
+          
+        }catch (\Throwable $e)
+        {
+            \Log::info("Greska pri editu kategorije ". $e->getMessage());
+        }
+    }
+
+    public function DeleteKategorije($id)
+    {
+        try
+        {
+            \DB::table('kategorija')
+            ->where('idKategorija',$id)
+            ->delete();
+
+        }catch(\Throwable $e)
+        {
+            \Log::info("Greska pri brisanju kategorije ". $e->getMessage());
+
+        }
+    }
+
 }

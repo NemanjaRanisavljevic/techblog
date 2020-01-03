@@ -92,6 +92,7 @@ class PostModel extends Model
             \Log::info("Greska baze". $e->getMessage());
         }
     }
+    
 
     public function GetKomentari($id)
     {
@@ -122,5 +123,7 @@ class PostModel extends Model
             ->orderBy('s.create_on','DESC')
             ->paginate(6);
     }
+    
+   
     
 }

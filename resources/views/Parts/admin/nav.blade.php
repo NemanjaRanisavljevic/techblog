@@ -10,7 +10,7 @@
 
         <div class="list-group list-group-flush">
             <a href="{{route('admin-panel')}}" class="list-group-item list-group-item-action bg-light">Korisnici</a>
-
+            <a href="{{route('admin-kategorije')}}" class="list-group-item list-group-item-action bg-light">Kategorije</a>
         </div>
     </div>
     <!-- /#sidebar-wrapper -->

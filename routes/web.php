@@ -31,3 +31,6 @@ Route::put('/admin-edit','RegistracijaController@AdminEditKorinik')->name('admin
 
 Route::get('/admin-kategorije','AdminController@AdminPrikazKategorija')->name('admin-kategorije');
 Route::post('/admin-kategorije','AdminController@AdminAddKategorije');
+Route::get('/admin-kategorije/{id}','AdminController@AdminGetKategorijeId');
+Route::put('/admin-kategorije','AdminController@AdminEditKategorije');
+Route::post('/admin-kategorije/{id}','AdminController@AdminBrisanjeKategorije');
