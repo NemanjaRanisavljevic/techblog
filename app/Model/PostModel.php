@@ -11,6 +11,8 @@ class PostModel extends Model
     public $slikaIme;
     public $korisnikId;
     public $kategorijaId;
+    public $slikaId;
+    public $postId;
 
     public function InsertPosta()
     {
@@ -89,7 +91,7 @@ class PostModel extends Model
                 ->get();
         } catch (\Throwable $e) 
         {
-            \Log::info("Greska baze". $e->getMessage());
+            \Log::info("Greska baze ". $e->getMessage());
         }
     }
     
@@ -122,6 +124,61 @@ class PostModel extends Model
             ->where("p.kategorijaId",$id)
             ->orderBy('s.create_on','DESC')
             ->paginate(6);
+    }
+
+    public function EditPost()
+    {
+        try{
+            \DB::transaction(function(){
+                if($this->slikaIme != null)
+                {
+                    \DB::table("slika")
+                    ->where('idSlika',$this->slikaId)
+                    ->update([
+                        "putanja" => $this->slikaIme,
+                        "alt"=> $this->naslov
+                    ]);
+                }
+                
+
+                \DB::table("post")
+                ->where('idPost',$this->postId)
+                ->update([
+                    "naslov" => $this->naslov,
+                    "opis" => $this->opis,
+                    "slikaId" => $this->slikaId,
+                    "korisnikId" => $this->korisnikId,
+                    "kategorijaId" => $this->kategorijaId
+                ]);
+            });
+
+        }catch(\Throwable $e){
+            \Log::info("Greska pri editu posta". $e->getMessage());
+        }
+
+    }
+
+    public function DeletePost()
+    {
+        try{
+            \DB::transaction(function(){
+                
+                \DB::table("komentar")
+                ->where('postId',$this->postId)
+                ->delete();
+
+                \DB::table('slika')
+                ->where('idSlika',$this->slikaId)
+                ->delete();
+                
+                \DB::table("post")
+                ->where('idPost',$this->postId)
+                ->delete();
+            });
+
+        }catch(\Throwable $e){
+            \Log::info("Greska pri brisanju posta". $e->getMessage());
+        }
     }
     
    

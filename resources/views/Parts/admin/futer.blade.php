@@ -9,7 +9,7 @@
     const baseUrl = "{{ url('/') }}";
 </script>
 
-<script src="{{asset("vendor/jquery/jquery.min.js")}}"></script> -->
+<script src="{{asset("vendor/jquery/jquery.min.js")}}"></script> 
 <script src="{{asset("vendor/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
 
 <script src="{{asset('/')}}jsProvera/adminJs/adminBrisanje.js"></script>
@@ -19,7 +19,7 @@
 <script src="{{asset('/')}}plugin/notifySettings.js"></script>
 
 
-<!-- Menu Toggle Script -->
+
 <script>
     $("#menu-toggle").click(function(e) {
         e.preventDefault();

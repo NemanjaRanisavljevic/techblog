@@ -42,6 +42,37 @@ $(".btnBrisanjeKorisnika").click(function () {
 
 });
 
+$(".btnBrisanjeObjave").click(function () {
+    var idObjave = $(this).attr('data-id');
+    console.log(idObjave);
+    $.ajax({
+        url: baseUrl + '/admin-post',
+        type:'POST',
+        data:{
+            id:idObjave
+        },
+        success:function (data) {
+            location.reload(true); 
+        },
+        error(xhr)
+        {
+            
+            var status=xhr.status;
+            switch(status)
+            {
+                case 500:
+                    console.log("Greska na serveru.");
+                    break;
+                case 404:
+                    console.log("Nije pronadjena stranica");
+                    break;
+            }
+
+        }
+    });
+
+});
+
 $(".btnBrisanjeKategorija").click(function () {
     var idKategorije = $(this).attr('data-id');
     
@@ -129,6 +160,42 @@ $(".btnEditKategorije").click(function () {
         success:function (data) {          
             $("#kategorijaEditId").val(idKategorije);
             $("#nazivEditKategorije").val(data[0].nazivKategorije);
+        },
+        error(xhr)
+        {
+            
+            var status=xhr.status;
+            switch(status)
+            {
+                case 500:
+                    console.log("Greska na serveru.");
+                    break;
+                case 404:
+                    console.log("Nije pronadjena stranica");
+                    break;
+            }
+
+        }
+    });
+
+});
+
+$(".btnEditObjave").click(function () {
+    var idObjave = $(this).attr('data-id');
+    
+    $.ajax({
+        url: baseUrl + '/admin-post/id',
+        type:'GET',
+        data:{
+            id:idObjave
+        },
+        success:function (data) {          
+            $("#objaveIdEdit").val(idObjave);
+            $("#naslovEdit").val(data[0].naslov);
+            $("#opisEdit").val(data[0].opis);
+            $("#korisnikIdEdit").val(data[0].idKorisnik);
+            $("#slikaIdEditObj").val(data[0].slikaId);
+            $("#putanjaEditObj").val(data[0].putanja);
         },
         error(xhr)
         {

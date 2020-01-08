@@ -34,3 +34,9 @@ Route::post('/admin-kategorije','AdminController@AdminAddKategorije');
 Route::get('/admin-kategorije/{id}','AdminController@AdminGetKategorijeId');
 Route::put('/admin-kategorije','AdminController@AdminEditKategorije');
 Route::post('/admin-kategorije/{id}','AdminController@AdminBrisanjeKategorije');
+
+Route::get('/admin-post','PostController@GetAllAdmin')->name('admin-post');
+Route::get('/admin-post/{id}','PostController@GetIdPost');
+Route::put('/admin-post','PostController@EditPost');
+Route::post('/admin-post','PostController@DeletePost');
+
