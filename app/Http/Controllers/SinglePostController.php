@@ -35,6 +35,8 @@ class SinglePostController extends Controller
         }else
         {
             $komentari = $this->postModel->GetKomentari($request->id);
+            // dd($komentari);
+            
             $najKomentari = $this->komentarModel->GetNajkomentarisanije();
             
             return view('Pages/singlePost',['kategorije'=>$kategorijeData,'infoPost'=>$postData,'komentari'=>$komentari,'najkomentarisanije'=>$najKomentari]);
@@ -68,6 +70,7 @@ class SinglePostController extends Controller
                 'putanja' => $unetiKomentar[0]->putanja,
                 'sadrzaj' => $unetiKomentar[0]->sadrzaj,
                 'datumPrikaz' => $datumPrikaz,
+                'idKomentar' => $unetiKomentar[0]->idKomentar,
                 'brojKomentara' => $request->brojKomentara + 1
             );
 
@@ -77,5 +80,11 @@ class SinglePostController extends Controller
         {
             \Log::info("Greska pri dohvatanju insertovanog komentara". $e->getMessage());
         }
+    }
+
+    public function DeleteKomentara(Request $request)
+    {
+        $this->komentarModel->DeleteKomenatar($request->id);
+        abort(204);
     }
 }

@@ -1690,3 +1690,8 @@ hr.invis3 {
     width: 788px;
     height: 449px;
 }
+.kom-delete
+{
+    float: right;
+    border: none;
+}

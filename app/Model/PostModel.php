@@ -101,13 +101,14 @@ class PostModel extends Model
         try 
         {
             return \DB::table("post as p")
-                ->join("korisnik as k","k.idKorisnik","=","p.korisnikId")
-                ->join("slika as s","s.idSlika","=","k.idKorisnik")
-                ->join("komentar as kom","kom.postId","=","p.idPost")
-                ->select('k.ime','k.prezime','kom.idKomentar','kom.sadrzaj','kom.create_on','s.putanja',\DB::raw('count(kom.idKomentar) as brojKomentara'))
-                ->where('p.idPost',$id)
-                ->groupBy('kom.idKomentar','k.ime','k.prezime','kom.idKomentar','kom.sadrzaj','kom.create_on','s.putanja')
-                ->get();
+            ->join("korisnik as k","k.idKorisnik","=","p.korisnikId")
+            ->join("slika as s","s.idSlika","=","k.slikaId")
+            ->join("komentar as kom","kom.postId","=","p.idPost")
+            ->select('k.idKorisnik','k.ime','k.prezime','kom.idKomentar','kom.sadrzaj','kom.create_on','s.putanja',\DB::raw('count(kom.idKomentar) as brojKomentara'))
+            ->where('p.idPost',$id)
+            ->groupBy('kom.idKomentar','k.ime','k.prezime','kom.idKomentar','kom.sadrzaj','kom.create_on','s.putanja','k.idKorisnik')
+            ->get();
+            
         } catch (\Throwable $e) 
         {
             \Log::info("Greska baze". $e->getMessage());

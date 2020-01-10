@@ -15,6 +15,7 @@ Route::get('/post','PostController@PostPrikaz')->name('post');
 Route::post('/post','PostController@InsertPosta');
 
 Route::get('/single-post/{id}','SinglePostController@GetIdSingle')->name('single');
+Route::post('/single-post','SinglePostController@DeleteKomentara');
 
 Route::get('/kat-nav/{id}','IndexController@PrikazKategorijaNav');
 Route::get('/kat-all/{id}','IndexController@GetSvihPostovaZaKategoriju')->name('kat-all');

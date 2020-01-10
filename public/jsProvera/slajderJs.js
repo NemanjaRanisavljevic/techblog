@@ -149,7 +149,11 @@ $('#btnKomentar').click(function(){
                                     <img src="${baseUrl}/upload/${data.putanja}" alt="" class="rounded-circle">
                                 </a>
                                 <div class="media-body">
-                                    <h4 class="media-heading user_name">${data.ime} ${data.prezime}<small>${data.datumPrikaz}</small></h4>
+                                    <h4 class="media-heading user_name">${data.ime} ${data.prezime}<small>${data.datumPrikaz}</small>
+                                        <button type="button" class="btn-danger btn-sm kom-delete btn-delete-kom" data-id="${data.idKomentar}">
+                                                <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </h4>
                                     <p>${data.sadrzaj}</p>
                                     <!-- <a href="#" class="btn btn-primary btn-sm">Reply</a> -->
                                 </div>
@@ -162,7 +166,7 @@ $('#btnKomentar').click(function(){
     
                 var wrapper = document.getElementById("ispisKomentara");
                 wrapper.innerHTML += ispis;
-               
+                AddClick();
             },
             error(xhr)
             {
@@ -187,3 +191,39 @@ $('#btnKomentar').click(function(){
     }
 
 });
+AddClick();
+function AddClick()
+{
+    //Brisanje komentara
+$('.btn-delete-kom').click(function(){
+    var idKomentara =  $(this).attr('data-id');
+    
+    $.ajax({
+        url: baseUrl + '/single-post',
+        type:'POST',
+        data:{
+            id:idKomentara
+        },
+        success:function (data) {          
+            location.reload(true);
+        },
+        error(xhr)
+        {
+            
+            var status=xhr.status;
+            switch(status)
+            {
+                case 500:
+                    console.log("Greska na serveru.");
+                    break;
+                case 404:
+                    console.log("Nije pronadjena stranica");
+                    break;
+            }
+
+        }
+    });
+
+});
+
+}

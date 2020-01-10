@@ -82,9 +82,18 @@
                                                     <img src="{{asset('/')}}upload/{{$komentar->putanja}}" alt="" class="rounded-circle">
                                                 </a>
                                                 <div class="media-body">
-                                                    <h4 class="media-heading user_name">{{$komentar->ime}} {{$komentar->prezime}}<small>{{$datumPrikazKom}}</small></h4>
+                                                    <h4 class="media-heading user_name">{{$komentar->ime}} {{$komentar->prezime}}<small>{{$datumPrikazKom}}</small>
+                                                        @if(session()->has('korisnik'))
+                                                        @if($komentar->idKorisnik == session('korisnik')->idKorisnik || session('korisnik')->naziv == 'admin' || session('korisnik')->naziv == 'moderator')
+                                                        <button type="button" class="btn-danger btn-sm kom-delete btn-delete-kom" data-id="{{$komentar->idKomentar}}">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                        @endif
+                                                        @endif
+                                                    </h4>
                                                     <p>{{$komentar->sadrzaj}}</p>
-                                                    <!-- <a href="#" class="btn btn-primary btn-sm">Reply</a> -->
+                                                    
+                                                    <!-- <a href="#" class="btn btn-primary btn-sm">Reply</a>  -->
                                                 </div>
                                             </div>
                                            

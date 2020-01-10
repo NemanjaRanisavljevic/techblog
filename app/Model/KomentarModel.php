@@ -53,4 +53,15 @@ class KomentarModel extends Model
             \Log::info("Greska pri dohvatanju komentara ". $e->getMessage());
         }
     }
+
+    public function DeleteKomenatar($id)
+    {
+        try {
+            \DB::table('komentar')
+            ->where('idKomentar',$id)
+            ->delete();
+        } catch (\Throwable $e) {
+            \Log::info("Greska pri brisanje komentara ". $e->getMessage());
+        }
+    }
 }
