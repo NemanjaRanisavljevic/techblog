@@ -54,12 +54,19 @@ class KomentarModel extends Model
         }
     }
 
-    public function DeleteKomenatar($id)
+    public function DeleteKomenatar($id,$idPost)
     {
         try {
             \DB::table('komentar')
             ->where('idKomentar',$id)
             ->delete();
+
+            return \DB::table('komentar as kom')
+            ->join('korisnik as k','k.idKorisnik','=','kom.korisnikId')
+            ->join('slika as s','s.idSlika','=','k.slikaId')
+            ->select('k.ime','k.prezime','kom.idKomentar','kom.sadrzaj','kom.create_on','s.putanja')
+            ->where('kom.postId',$idPost)
+            ->get();
         } catch (\Throwable $e) {
             \Log::info("Greska pri brisanje komentara ". $e->getMessage());
         }

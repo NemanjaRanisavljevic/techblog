@@ -197,15 +197,48 @@ function AddClick()
     //Brisanje komentara
 $('.btn-delete-kom').click(function(){
     var idKomentara =  $(this).attr('data-id');
+    var brKomentara = $('#skriveniBrKomentara').val();
+    var idPost = $('#skriveniIdPosta').val();
     
     $.ajax({
         url: baseUrl + '/single-post',
         type:'POST',
         data:{
-            id:idKomentara
+            id:idKomentara,
+            brojKomentara:brKomentara,
+            idPost:idPost
         },
-        success:function (data) {          
-            location.reload(true);
+        success:function (data) {  
+            
+            var ispis='';
+            $.each(data,function(index,value) {
+                ispis += ` <h4 class="small-title">${index+1} Komentara</h4>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="comments-list">
+                            <div class="media">
+                                <a class="media-left" href="#">
+                                    <img src="${baseUrl}/upload/${value.putanja}" alt="" class="rounded-circle">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading user_name">${value.ime} ${value.prezime}<small>${value.datumPrikaz}</small>
+                                        <button type="button" class="btn-danger btn-sm kom-delete btn-delete-kom" data-id="${value.idKomentar}">
+                                                <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </h4>
+                                    <p>${value.sadrzaj}</p>
+                                    <!-- <a href="#" class="btn btn-primary btn-sm">Reply</a> -->
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div><!-- end col -->
+                </div><!-- end row -->`;
+            }); 
+    
+                var wrapper = document.getElementById("ispisKomentara");
+                wrapper.innerHTML = ispis;
+                AddClick();
         },
         error(xhr)
         {

@@ -84,7 +84,30 @@ class SinglePostController extends Controller
 
     public function DeleteKomentara(Request $request)
     {
-        $this->komentarModel->DeleteKomenatar($request->id);
-        abort(204);
+        $obrisanKomentar = $this->komentarModel->DeleteKomenatar($request->id,$request->idPost);
+        
+        $data = array();
+        foreach($obrisanKomentar as $x)
+        {
+            $vreme =$x->create_on;
+            $datumNiz = explode(" ",$vreme);
+            $datum = explode("-",$datumNiz[0]);
+            $timestemp = mktime(0,0,0,$datum[1],$datum[2],$datum[0]);
+            $datumPrikaz = date("j F, Y",$timestemp);
+
+            $dataArrays = array(
+                'ime' => $x->ime,
+                'prezime' => $x->prezime,
+                'putanja' => $x->putanja,
+                'sadrzaj' => $x->sadrzaj,
+                'datumPrikaz' => $datumPrikaz,
+                'idKomentar' => $x->idKomentar,
+                'brojKomentara' => $request->brojKomentara - 1
+            );
+            array_push($data,$dataArrays);
+        }
+        
+            return $data;
+        
     }
 }
