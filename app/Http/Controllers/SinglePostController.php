@@ -96,6 +96,7 @@ class SinglePostController extends Controller
             $datumPrikaz = date("j F, Y",$timestemp);
 
             $dataArrays = array(
+                'idKorisnik' => $x->idKorisnik,
                 'ime' => $x->ime,
                 'prezime' => $x->prezime,
                 'putanja' => $x->putanja,

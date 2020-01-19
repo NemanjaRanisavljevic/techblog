@@ -100,14 +100,21 @@ class PostModel extends Model
     {
         try 
         {
-            return \DB::table("post as p")
-            ->join("korisnik as k","k.idKorisnik","=","p.korisnikId")
-            ->join("slika as s","s.idSlika","=","k.slikaId")
-            ->join("komentar as kom","kom.postId","=","p.idPost")
-            ->select('k.idKorisnik','k.ime','k.prezime','kom.idKomentar','kom.sadrzaj','kom.create_on','s.putanja',\DB::raw('count(kom.idKomentar) as brojKomentara'))
-            ->where('p.idPost',$id)
-            ->groupBy('kom.idKomentar','k.ime','k.prezime','kom.idKomentar','kom.sadrzaj','kom.create_on','s.putanja','k.idKorisnik')
+            return \DB::table('komentar as kom')
+            ->join('korisnik as k','k.idKorisnik','=','kom.korisnikId')
+            ->join('slika as s','s.idSlika','=','k.slikaId')
+            ->select('k.idKorisnik','k.ime','k.prezime','kom.idKomentar','kom.sadrzaj','kom.create_on','s.putanja')
+            ->where('kom.postId',$id)
             ->get();
+
+            // return \DB::table("post as p")
+            // ->join("korisnik as k","k.idKorisnik","=","p.korisnikId")
+            // ->join("slika as s","s.idSlika","=","k.slikaId")
+            // ->join("komentar as kom","kom.postId","=","p.idPost")
+            // ->select('k.idKorisnik','k.ime','k.prezime','kom.idKomentar','kom.sadrzaj','kom.create_on','s.putanja',\DB::raw('count(kom.idKomentar) as brojKomentara'))
+            // ->where('p.idPost',$id)
+            // ->groupBy('kom.idKomentar','k.ime','k.prezime','kom.idKomentar','kom.sadrzaj','kom.create_on','s.putanja','k.idKorisnik')
+            // ->get();
             
         } catch (\Throwable $e) 
         {
