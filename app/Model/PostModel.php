@@ -99,17 +99,13 @@ class PostModel extends Model
     public function GetKomentari($id)
     {
         try 
-        { 
-            
-            
+        {
             return \DB::table('komentar as kom')
             ->join('korisnik as k','k.idKorisnik','=','kom.korisnikId')
             ->join('slika as s','s.idSlika','=','k.slikaId')
-            ->select('k.ime','k.prezime','kom.idKomentar','kom.sadrzaj','kom.create_on','s.putanja','k.idKorisnik',\DB::raw('count(kom.idKomentar) as brojKomentara'))
+            ->select('k.idKorisnik','k.ime','k.prezime','kom.idKomentar','kom.sadrzaj','kom.create_on','s.putanja')
             ->where('kom.postId',$id)
-            ->groupBy('kom.idKomentar','k.ime','k.prezime','kom.idKomentar','kom.sadrzaj','kom.create_on','s.putanja','k.idKorisnik')
             ->get();
-
 
             // return \DB::table("post as p")
             // ->join("korisnik as k","k.idKorisnik","=","p.korisnikId")

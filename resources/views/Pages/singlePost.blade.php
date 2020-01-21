@@ -84,7 +84,7 @@
                                                 <div class="media-body">
                                                     <h4 class="media-heading user_name">{{$komentar->ime}} {{$komentar->prezime}}<small>{{$datumPrikazKom}}</small>
                                                         @if(session()->has('korisnik'))
-                                                        @if($komentar->idKorisnik == session('korisnik')->idKorisnik || session('korisnik')->naziv == 'admin' || session('korisnik')->naziv == 'moderator')
+                                                        @if($komentar->idKorisnik == session('korisnik')->idKorisnik || session('korisnik')->naziv == 'Admin' || session('korisnik')->naziv == 'Moderator')
                                                         <button type="button" class="btn-danger btn-sm kom-delete btn-delete-kom" data-id="{{$komentar->idKomentar}}">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </button>

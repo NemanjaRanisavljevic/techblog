@@ -215,3 +215,70 @@ $(".btnEditObjave").click(function () {
     });
 
 });
+
+$(".btnBrisanjeUloge").click(function () {
+    var idUloge = $(this).attr('data-id');
+    
+    $.ajax({
+        url: baseUrl + '/admin-uloge/id',
+        type:'POST',
+        data:{
+            id:idUloge
+        },
+        success:function (data) {
+             location.reload(true); 
+        },
+        error(xhr)
+        {
+            var status=xhr.status;
+            switch(status)
+            {
+                case 500:
+                    console.log("Greska na serveru.");
+                    break;
+                case 404:
+                    console.log("Nije pronadjena stranica");
+                    break;
+                case 422:
+                    $.notify("Nije moguce obrisati ulogu postoje korisnici sa tom uloge!","error");
+                    break;
+            }
+
+        }
+    });
+
+});
+
+$(".btnEditUloge").click(function () {
+    var idUloge = $(this).attr('data-id');
+    
+    $.ajax({
+        url: baseUrl + '/admin-uloge/id',
+        type:'GET',
+        data:{
+            id:idUloge
+        },
+        success:function (data) {   
+                   
+            $("#ulogeEditId").val(idUloge);
+            $("#nazivEditUloge").val(data[0].naziv);
+            
+        },
+        error(xhr)
+        {
+            
+            var status=xhr.status;
+            switch(status)
+            {
+                case 500:
+                    console.log("Greska na serveru.");
+                    break;
+                case 404:
+                    console.log("Nije pronadjena uloga");
+                    break;
+            }
+
+        }
+    });
+
+});

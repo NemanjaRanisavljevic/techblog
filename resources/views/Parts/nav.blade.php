@@ -59,7 +59,7 @@
 
                         
                         
-                        @if(session()->has('korisnik') && session('korisnik')->naziv == "admin")
+                        @if(session()->has('korisnik') && session('korisnik')->naziv == "Admin")
                             <li class="nav-item">
                                 <a class="nav-link" href="{{route('post')}}">Kreiranje objave</a>
                             </li>

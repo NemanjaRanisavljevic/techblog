@@ -55,3 +55,58 @@ function EditovanjeKategorije()
     }
     
 }
+function DodavanjeUloge()
+{
+    var naziv = $('#nazivUlogeAdd').val();
+    
+    var regNaziv =/^[A-ZČĆŽŠĐ][\s0-9A-zčćžšđ]{2,}$/;
+    var greske = Array();
+
+    if(!regNaziv.test(naziv))
+    {
+        $("#nazivUlogeAdd").css({"border-color":"red"});
+        $("#nazivUlogeAdd").focus(function(){
+            $("#nazivUlogeAdd").css({"border-color":"#dadada"})
+        });
+        $.notify("Polje za naziv je obavezno, mora da pocne velikim slovom!","error");
+        greske.push("Greska naslov");
+    }
+
+    if(greske.length !=0)
+    {
+        return false;
+    }
+    else
+    {
+        return true;      
+    }
+    
+}
+
+function EditovanjeUloge()
+{
+    var naziv = $('#nazivEditUloge').val();
+    
+    var regNaziv =/^[A-ZČĆŽŠĐ][\s0-9A-zčćžšđ]{2,}$/;
+    var greske = Array();
+
+    if(!regNaziv.test(naziv))
+    {
+        $("#nazivEditUloge").css({"border-color":"red"});
+        $("#nazivEditUloge").focus(function(){
+            $("#nazivEditUloge").css({"border-color":"#dadada"})
+        });
+        $.notify("Polje za naziv je obavezno, mora da pocne velikim slovom!","error");
+        greske.push("Greska naslov");
+    }
+
+    if(greske.length !=0)
+    {
+        return false;
+    }
+    else
+    {
+        return true;      
+    }
+    
+}

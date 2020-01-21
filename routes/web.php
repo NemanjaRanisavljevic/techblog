@@ -41,3 +41,9 @@ Route::get('/admin-post/{id}','PostController@GetIdPost');
 Route::put('/admin-post','PostController@EditPost');
 Route::post('/admin-post','PostController@DeletePost');
 
+
+Route::get('/admin-uloge','UlogeController@GetAllUloge')->name('admin-uloge');
+Route::get('/admin-uloge/id','UlogeController@GetSingle');
+Route::post('/admin-uloge','UlogeController@InsertUloge');
+Route::put('/admin-uloge','UlogeController@EditUloge');
+Route::post('/admin-uloge/{id}','UlogeController@DeleteUloge');
