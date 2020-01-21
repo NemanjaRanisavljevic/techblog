@@ -199,6 +199,7 @@ $('.btn-delete-kom').click(function(){
     var idKomentara =  $(this).attr('data-id');
     var brKomentara = $('#skriveniBrKomentara').val();
     var idPost = $('#skriveniIdPosta').val();
+    var idKorisnikaa = $('#skriveniIdKorisnika').val();
     
     $.ajax({
         url: baseUrl + '/single-post',
@@ -209,7 +210,7 @@ $('.btn-delete-kom').click(function(){
             idPost:idPost
         },
         success:function (data) {  
-            
+            console.log(data);
             var ispis='';
             $.each(data,function(index,value) {
                 ispis += ` <h4 class="small-title">${index+1} Komentara</h4>
@@ -222,6 +223,7 @@ $('.btn-delete-kom').click(function(){
                                 </a>
                                 <div class="media-body">
                                     <h4 class="media-heading user_name">${value.ime} ${value.prezime}<small>${value.datumPrikaz}</small>
+                                    <!-- Ovde treba proveriti sa id Korisnika -->
                                         <button type="button" class="btn-danger btn-sm kom-delete btn-delete-kom" data-id="${value.idKomentar}">
                                                 <i class="fas fa-trash-alt"></i>
                                         </button>
