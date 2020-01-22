@@ -42,7 +42,7 @@
                         <ul>
                             <li><a href="{{route('index')}}">Pocetna</a></li>
                             <li><a href="{{route('kontakt')}}">Kontakt</a></li>
-                        @if(session()->has('korisnik') && session('korisnik')->naziv == "Admin")
+                        @if(session()->has('korisnik') && session('korisnik')->naziv == "Admin" || session()->has('korisnik') && session('korisnik')->naziv == "Moderator")
                             <li>
                                 <a href="{{route('post')}}">Kreiranje objave</a>
                             </li>

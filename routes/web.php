@@ -11,9 +11,6 @@ Route::get('/aktivacija/{token}','RegistracijaController@AktivacijaNaloga');
 Route::post('/logovanje','RegistracijaController@Logovanje')->name('logovanje');
 Route::get('/logout','RegistracijaController@Logout')->name('logout');
 
-Route::get('/post','PostController@PostPrikaz')->name('post');
-Route::post('/post','PostController@InsertPosta');
-
 Route::get('/single-post/{id}','SinglePostController@GetIdSingle')->name('single');
 Route::post('/single-post','SinglePostController@DeleteKomentara');
 
@@ -23,6 +20,7 @@ Route::get('/kat-all/{id}','IndexController@GetSvihPostovaZaKategoriju')->name('
 Route::post('/komentar','SinglePostController@InsertKomentara');
 Route::post('/kontakt','KontaktController@SlanjeEmaila')->name('kontakt');
 
+Route::middleware(['zastitaAdminPanela'])->group(function () {
 
 Route::get('/admin','RegistracijaController@AdminPrikazKorisnika')->name('admin-panel');
 Route::get('/admin/{id}','RegistracijaController@GetKorisnikId');
@@ -47,3 +45,8 @@ Route::get('/admin-uloge/id','UlogeController@GetSingle');
 Route::post('/admin-uloge','UlogeController@InsertUloge');
 Route::put('/admin-uloge','UlogeController@EditUloge');
 Route::post('/admin-uloge/{id}','UlogeController@DeleteUloge');
+
+Route::get('/post','PostController@PostPrikaz')->name('post');
+Route::post('/post','PostController@InsertPosta');
+
+});

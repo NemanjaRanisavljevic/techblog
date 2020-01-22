@@ -28,6 +28,8 @@ class SinglePostController extends Controller
         
         $postData = $this->postModel->GetIdPost($request->id);
 
+        //dd($postData);
+
         if(empty($postData))
         {      
             return redirect()->back()->with("NotFoundPost","Ne postoji objava koju trazite.");
