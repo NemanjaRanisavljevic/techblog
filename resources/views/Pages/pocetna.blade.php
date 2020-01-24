@@ -22,6 +22,7 @@
             $datum = explode("-",$datumNiz[0]);
             $timestemp = mktime(0,0,0,$datum[1],$datum[2],$datum[0]);
             $datumPrikaz = date("j F, Y",$timestemp);
+            $naslovSlajder = substr($x->naslov,0,38);
         ?>
 
         @switch($loop->index)
@@ -41,7 +42,7 @@
                         <div class="shadow-desc">
                             <div class="blog-meta">
                                 <span class="bg-orange"><a href="{{route('kat-all',['id'=>$x->idKategorija])}}" title="">{{ $x->nazivKategorije }}</a></span>
-                                <h4><a href="{{ route('single',['id'=>$x->idPost])}}" title="">{{ $x->naslov }}</a></h4>
+                                <h4><a href="{{ route('single',['id'=>$x->idPost])}}" title="">{{ $naslovSlajder }} ...</a></h4>
                                 <small><a href="{{ route('single',['id'=>$x->idPost])}}" title="">{{$datumPrikaz}}</a></small>
                                 <small><a href="{{ route('single',['id'=>$x->idPost])}}" title="">{{ $x->ime }}</a></small>
                             </div><!-- end meta -->
@@ -80,6 +81,7 @@
                         $timestemp = mktime(0,0,0,$datum[1],$datum[2],$datum[0]);
                         $datumPrikaz = date("j F, Y",$timestemp);
 
+                        $opisPosta = substr($p->opis,0,206);
                 ?>
 
 
@@ -96,7 +98,7 @@
 
                             <div class="blog-meta big-meta col-md-8">
                                 <h4><a href="{{ route('single',['id'=>$p->idPost])}}" title="">{{ $p->naslov }}</a></h4>
-                                <p>{{ $p->opis }}</p>
+                                <p>{{ $opisPosta }} ...</p>
                                 <small class="firstsmall"><a class="bg-orange" href="{{route('kat-all',['id'=>$p->idKategorija])}}" title="">{{ $p->nazivKategorije }}</a></small>
                                 <small><a href="{{ route('single',['id'=>$p->idPost])}}" title="">{{$datumPrikaz}}</a></small>
                                 <small><a href="{{ route('single',['id'=>$p->idPost])}}" title="">{{ $p->ime}} {{$p->prezime }}</a></small>

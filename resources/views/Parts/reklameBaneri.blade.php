@@ -30,12 +30,13 @@
                                     $datum = explode("-",$datumNiz[0]);
                                     $timestemp = mktime(0,0,0,$datum[1],$datum[2],$datum[0]);
                                     $datumPrikazKom = date("j F, Y ",$timestemp); 
+                                    $naslov = substr($najKom->naslov,0,20);
                     ?>
 
                         <a href="{{ route('single',['id'=>$najKom->idPost])}}" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="w-100 justify-content-between">
                                 <img src="{{asset('/')}}upload/{{$najKom->putanja}}" alt="" class="img-fluid float-left">
-                                <h5 class="mb-1">{{$najKom->naslov}}</h5>
+                                <h5 class="mb-1">{{$naslov}} ...</h5>
                                 <small>{{$datumPrikazKom}}</small>
                             </div>
                         </a>

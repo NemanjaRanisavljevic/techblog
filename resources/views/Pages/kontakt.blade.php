@@ -2,7 +2,7 @@
 
 
 @section("sredina")
-    @section("iconStranice")<i class="fa fa-envelope-open-o bg-orange"></i>@endsection
+    @section("iconStranice")<i class="fa fa-newspaper-o bg-orange"></i>@endsection
     @section("naslovStranice")Kontakt @endsection
     @include("Parts.slajderZaOstale")
 

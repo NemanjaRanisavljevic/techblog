@@ -5,6 +5,9 @@ Route::get('/','IndexController@IndexPrikaz')->name('index');
 Route::get('/kontakt','KontaktController@PrikazKontakt')->name('kontakt');
 Route::get('/registracija','RegistracijaController@RegistracijaPrikaz')->name('registracija');
 
+Route::get('/post','PostController@PostPrikaz')->name('post');
+Route::post('/post','PostController@InsertPosta');
+
 Route::post('/registracija','RegistracijaController@PosRegistracija');
 Route::get('/aktivacija/{token}','RegistracijaController@AktivacijaNaloga');
 
@@ -46,7 +49,6 @@ Route::post('/admin-uloge','UlogeController@InsertUloge');
 Route::put('/admin-uloge','UlogeController@EditUloge');
 Route::post('/admin-uloge/{id}','UlogeController@DeleteUloge');
 
-Route::get('/post','PostController@PostPrikaz')->name('post');
-Route::post('/post','PostController@InsertPosta');
+
 
 });

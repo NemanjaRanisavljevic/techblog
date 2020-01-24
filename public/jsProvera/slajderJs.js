@@ -11,18 +11,18 @@ $(document).ready(function() {
         success:function (data) {
             var ispis='';
             $.each(data,function(index,value) {
-
+                
             ispis += `<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
                         <div class="blog-box"> 
                             <div class="post-media">
                                 <a href="${baseUrl}/single-post/${value.idPost}" title="">
                                     <img src="${baseUrl}/upload/${value.putanja}" alt="${value.nazivKategorije}" class="img-fluid">
                                         <div class="hovereffect"></div>
-                                        <span class="menucat"> ${value.nazivKategorije} <span>
+                                        <span class="menucat"> ${value.nazivKategorije}<span>
                                 </a>
                             </div>
                             <div class="blog-meta">
-                                <h4><a href="${baseUrl}/single-post/${value.idPost}" title=""> ${value.naslov} </a></h4>
+                                <h4><a href="${baseUrl}/single-post/${value.idPost}" title=""> ${value.naslov.substring(0,20)} ...</a></h4>
                             </div>
                         </div>
                     </div>`;
@@ -75,7 +75,7 @@ $(".linkSlajder").click(function () {
                                 </a>
                             </div>
                             <div class="blog-meta">
-                                <h4><a href="${baseUrl}/single-post/${value.idPost}" title=""> ${value.naslov} </a></h4>
+                                <h4><a href="${baseUrl}/single-post/${value.idPost}" title=""> ${value.naslov.substring(0,20)} ...</a></h4>
                             </div>
                         </div>
                     </div>`;
