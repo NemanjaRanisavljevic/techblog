@@ -13,8 +13,8 @@
                     <div class="page-wrapper">
                         <div class="row">
                             <div class="col-lg-5">
-                                <h4>Who we are</h4>
-                                <p>Tech Blog is a personal blog for handcrafted, cameramade photography content, fashion styles from independent creatives around the world.</p>
+                                <h4>Uputstvo</h4>
+                                <p>Naslov mora da pocne sa velikim slovom i sadrzi slova i brojeve, minimalan broj karaktera je deset karaktera.</p>
 
                             </div>
                             <div class="col-lg-7">

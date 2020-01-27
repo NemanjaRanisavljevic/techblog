@@ -13,8 +13,10 @@
                     <div class="page-wrapper">
                         <div class="row">
                             <div class="col-lg-5">
-                                <h4>Who we are</h4>
-                                <p>Tech Blog is a personal blog for handcrafted, cameramade photography content, fashion styles from independent creatives around the world.</p>
+                                <h4>Uputstvo za registraciju</h4>
+                                <p>Vase ime mora da pocne velikim slovom, da ima minimum dva karaktera, a maksimalno deset.</p>
+                                <p>Vase prezime mora da pocne velikim slovom, da ima minimum dva karaktera, a maksimalno petnaest.</p>
+                                <p>Vasa lozinka mora da pocne velikim slovom, da ima minimum pet karaktera.</p>
                             </div>
                             <div class="col-lg-7">
                             @if(session()->has('uspesno'))
@@ -33,7 +35,7 @@
                                     
                                     <input type="email" class="form-control" name="emailReg" id="emailReg" placeholder="Email">
                                    
-                                    <input type="password" class="form-control" name="sifraReg" id="sifraReg" placeholder="Password">
+                                    <input type="password" class="form-control" name="sifraReg" id="sifraReg" placeholder="Lozinka">
 
                                     <select class="form-control" name="polList" id="polList">
                                         <option selected value="0">Pol...</option>

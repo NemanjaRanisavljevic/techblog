@@ -4,8 +4,8 @@
             <div class="col-lg-7">
                 <div class="widget">
                     <div class="footer-text text-left">
-                        <a href="index.html"><img src="{{asset('/')}}images/version/tech-footer-logo.png" alt="" class="img-fluid"></a>
-                        <p>Tech Blog je blog vezan za tehnologiju i nova otkrica na ostale teme.</p>
+                        <a href="{{route('index')}}"><img src="{{asset('/')}}images/version/tech-footer-logo.png" alt="" class="img-fluid"></a>
+                        <p>Tech Blog je magazin blog vezan za tehnologiju i nova otkrica na ostale teme.</p>
                         <div class="social">
                            
                         </div>
@@ -47,7 +47,7 @@
                                 <a href="{{route('post')}}">Kreiranje objave</a>
                             </li>
                             <li>
-                                <a href="{{route('admin-panel')}}">Admin panel</a>
+                                <a href="{{route('admin-post')}}">Admin panel</a>
                             </li>
                         @endif
                         @if(!session()->has('korisnik'))

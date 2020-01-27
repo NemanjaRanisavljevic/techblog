@@ -3,7 +3,7 @@
 
 Route::get('/','IndexController@IndexPrikaz')->name('index');
 Route::get('/kontakt','KontaktController@PrikazKontakt')->name('kontakt');
-Route::get('/registracija','RegistracijaController@RegistracijaPrikaz')->name('registracija');
+Route::get('/registracija','RegistracijaController@RegistracijaPrikaz')->name('registracija')->middleware('zastitaNeAutorizovanihStrana');
 
 Route::get('/post','PostController@PostPrikaz')->name('post');
 Route::post('/post','PostController@InsertPosta');
