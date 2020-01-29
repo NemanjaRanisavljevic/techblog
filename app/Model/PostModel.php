@@ -45,7 +45,7 @@ class PostModel extends Model
             ->join("korisnik as k","k.idKorisnik","=","p.korisnikId")
             ->join("slika as s","s.idSlika","=","p.slikaId")
             ->orderBy('s.create_on','DESC')
-            ->paginate(6);
+            ->paginate(4);
     }
 
     public function PrikazSlajda()
