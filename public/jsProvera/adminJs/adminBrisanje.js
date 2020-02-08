@@ -189,7 +189,8 @@ $(".btnEditObjave").click(function () {
         data:{
             id:idObjave
         },
-        success:function (data) {          
+        success:function (data) { 
+            $("#ddlKategorijeEdit").val(data[0].idKategorija);        
             $("#objaveIdEdit").val(idObjave);
             $("#naslovEdit").val(data[0].naslov);
             $("#opisEdit").val(data[0].opis);
