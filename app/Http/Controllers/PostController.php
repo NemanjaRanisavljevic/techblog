@@ -91,6 +91,8 @@ class PostController extends Controller
             $this->postModel->postId = $request->objaveIdEdit;
 
             $this->postModel->EditPost();
+
+            
             
             return redirect()->back()->with("uspesno","Uspesno ste izmenili objavu.");
         }catch(QueryException $e)

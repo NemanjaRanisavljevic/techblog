@@ -35,6 +35,10 @@ $(".btnBrisanjeKorisnika").click(function () {
                 case 404:
                     console.log("Nije pronadjena stranica");
                     break;
+                case 422:
+                    $.notify("Nije moguce obrisati korisnika postoje njegove objave!","error");
+                    break;
+
             }
 
         }
@@ -190,12 +194,13 @@ $(".btnEditObjave").click(function () {
             id:idObjave
         },
         success:function (data) { 
+            console.log(data);
             $("#ddlKategorijeEdit").val(data[0].idKategorija);        
             $("#objaveIdEdit").val(idObjave);
             $("#naslovEdit").val(data[0].naslov);
             $("#opisEdit").val(data[0].opis);
             $("#korisnikIdEdit").val(data[0].idKorisnik);
-            $("#slikaIdEditObj").val(data[0].slikaId);
+            $("#slikaIdEditObj").val(data[0].idSlika);
             $("#putanjaEditObj").val(data[0].putanja);
         },
         error(xhr)

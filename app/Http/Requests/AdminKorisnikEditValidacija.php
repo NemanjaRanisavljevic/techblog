@@ -27,7 +27,7 @@ class AdminKorisnikEditValidacija extends FormRequest
             'imeEdit' => 'required|regex:/^[A-ZČĆŽŠĐ][a-zčćžšđ]{2,10}$/',
             'prezimeEdit' => 'required|regex:/^[A-ZČĆŽŠĐ][a-zčćžšđ]{2,}$/',
             'emailEdit' => 'required|email:rfc',
-            'slikaKorisnikaAdminEdit' => 'required|file|image',
+            'slikaKorisnikaAdminEdit' => 'file|image',
             'ddlPolEdit' => 'not_regex:/^[0]$/'
         ];
     }
@@ -40,13 +40,11 @@ class AdminKorisnikEditValidacija extends FormRequest
             'prezimeEdit.required'  => 'Polje za prezime je obavezno.',
             'prezimeEdit.regex'  => 'Prezime mora da ima min 2 karaktera i da pocne velikim slovom.',
             'emailEdit.email'  => 'E-mail nije u dobrom formatu.',
-            'emailEdit.required'  => 'Polje za email je obavezno.',
-            'sifraEdit.required'  => 'Polje za sifru je obavezno.',
+            'emailEdit.required'  => 'Polje za email je obavezno.',            
             'sifraEdit.regex'  => 'Sifra mora da sadrzi minimum 6 karaktera i da pocinje velikim slovom.',
             'ddlPolEdit.not_regex'  => 'Morate izabrati pol.',
-            'slikaKorisnikaAdminEdit.max' => 'Maksimalna velicina slike je 3 mb',
-            'slikaKorisnikaAdminEdit.required' => 'Slika je obavezna'
-
+            'slikaKorisnikaAdminEdit.max' => 'Maksimalna velicina slike je 3 mb'
+            
         ];
     }
 }

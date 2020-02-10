@@ -114,22 +114,30 @@ class RegistracijaController extends Controller
     public function AdminEditKorinik(AdminKorisnikEditValidacija $request)
     {
         
-        $slika = $request->file("slikaKorisnikaAdminEdit");
-        $slikaIme = $slika->getClientOriginalName();
-        $slikaIme = time()."_".$slikaIme;
+
+        if($request->slikaKorisnikaAdminEdit != null)
+        {
+            $slika = $request->file("slikaKorisnikaAdminEdit");
+            $slikaIme = $slika->getClientOriginalName();
+            $slikaIme = time()."_".$slikaIme;
+
+            public_path("upload");
+
+            $slika->move(public_path("upload"),$slikaIme);
+            $this->korisnikModel->slikaIme = $slikaIme;
+
+        }
         
-        public_path("upload");
+        
         try
         {
-            $slika->move(public_path("upload"),$slikaIme);
-
-            if(empty($request->sifraEdit))
+            if($request->sifraEdit == null)
             {
                 $this->korisnikModel->ime = $request->imeEdit;
                 $this->korisnikModel->prezime = $request->prezimeEdit;
                 $this->korisnikModel->email = $request->emailEdit;
                 $this->korisnikModel->pol = $request->ddlPolEdit;
-                $this->korisnikModel->slikaIme = $slikaIme;
+                
                 $this->korisnikModel->aktivan = $request->ddlAktivanEdit;
                 $this->korisnikModel->ulodaId = $request->ddlUlogaEdit;
                 $this->korisnikModel->idKorisnika = $request->korisnikIdEdit;
@@ -140,6 +148,7 @@ class RegistracijaController extends Controller
                 
             }else
             {
+                
                 $request->validate([
                     'sifraEdit' => 'required|regex:/^[A-Z][\w\d]{5,}$/'
                 ]);
@@ -147,7 +156,7 @@ class RegistracijaController extends Controller
                 $this->korisnikModel->prezime = $request->prezimeEdit;
                 $this->korisnikModel->email = $request->emailEdit;
                 $this->korisnikModel->pol = $request->ddlPolEdit;
-                $this->korisnikModel->slikaIme = $slikaIme;
+                
                 $this->korisnikModel->sifra = md5($request->sifraEdit);
                 $this->korisnikModel->aktivan = $request->ddlAktivanEdit;
                 $this->korisnikModel->ulodaId = $request->ddlUlogaEdit;
@@ -282,9 +291,17 @@ class RegistracijaController extends Controller
     {
         try{
             $date = Carbon::now();
-            
-            $this->korisnikModel->BrisanjeKorisnika($request->id,$date);
-            abort(204);
+
+            $data = $this->korisnikModel->ProveraPostova($request->id);
+
+            if(count($data) == 0 )
+           {
+                $this->korisnikModel->BrisanjeKorisnika($request->id,$date);
+                abort(204);
+           }else
+           {
+               abort(422);
+           }
 
         }catch (QueryException $e)
         {

@@ -158,17 +158,33 @@ class KorisnikModel extends Model
         }
     }
 
+    public function ProveraPostova($id)
+    {
+        try
+        {
+            return \DB::table("post as p")       
+                ->where('p.korisnikId',$id)
+                ->get();
+
+        }catch (\Throwable $e)
+        {
+            \Log::info("Greska pri proveri brisanja korisnika". $e->getMessage());
+        }
+    }
+
     public function EditKorisnikaBezSifre()
     {
         try
         {
             \DB::transaction(function(){
-                
+                if($this->slikaIme != NULL)
+                {
                 \DB::table("slika")
                 ->where('idSlika',$this->idSlika)
                 ->update([
                     "putanja" => $this->slikaIme
                     ]);
+                }
 
                 \DB::table('korisnik')
                 ->where('idKorisnik',$this->idKorisnika)
@@ -195,12 +211,15 @@ class KorisnikModel extends Model
         {
             \DB::transaction(function(){
                 
+                if($this->slikaIme != NULL)
+                {
                 \DB::table("slika")
                 ->where('idSlika',$this->idSlika)
                 ->update([
                     "putanja" => $this->slikaIme
                     ]);
-
+                }
+                
                 \DB::table('korisnik')
                 ->where('idKorisnik',$this->idKorisnika)
                 ->update([

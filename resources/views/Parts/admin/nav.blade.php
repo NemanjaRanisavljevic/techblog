@@ -11,10 +11,11 @@
         <div class="list-group list-group-flush">
         @if(session('korisnik')->naziv == "Admin" || session('korisnik')->naziv == "Moderator")
             <a href="{{route('admin-post')}}" class="list-group-item list-group-item-action bg-light">Objave</a>
+            <a href="{{route('admin-kategorije')}}" class="list-group-item list-group-item-action bg-light">Kategorije</a> 
         @endif
         @if(session('korisnik')->naziv == "Admin")
             <a href="{{route('admin-panel')}}" class="list-group-item list-group-item-action bg-light">Korisnici</a>
-            <a href="{{route('admin-kategorije')}}" class="list-group-item list-group-item-action bg-light">Kategorije</a> 
+            
             <a href="{{route('admin-uloge')}}" class="list-group-item list-group-item-action bg-light">Uloge</a>
             @endif
         </div>
