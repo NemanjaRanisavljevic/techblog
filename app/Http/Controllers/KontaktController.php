@@ -29,8 +29,9 @@ class KontaktController extends Controller
         return view('Pages/kontakt',['kategorije'=>$kategorijeData,'najkomentarisanije'=>$najKomentari]);
     }
 
-    public function SlanjeEmaila(KontaktValidacija $request)
+    public function SlanjeEmaila(Request $request)
     {
+        
         $mail = new PHPMailer(true);
        try
        {
@@ -41,7 +42,7 @@ class KontaktController extends Controller
         $mail->Host = 'smtp.gmail.com';  // backup
         $mail->SMTPAuth = true;
         $mail->Username = 'nemanjaranisavljevicsajt@gmail.com';
-        $mail->Password = 'beka123456';
+        $mail->Password = 'nemanja@123456';
         $mail->SMTPSecure = 'tls'; // tls enkripcija (moze i ssl)
         $mail->Port = 587;
         $mail->setFrom('nemanjaranisavljevicsajt@gmail.com', 'Tech-Blog kontakt.');

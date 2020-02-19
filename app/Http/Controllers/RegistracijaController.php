@@ -49,7 +49,7 @@ class RegistracijaController extends Controller
         return $korisnik;
     }
     
-    public function AdminAddKorisnika(AdminAddValidacija $request)
+    public function AdminAddKorisnika(Request $request)
     {
         
         $slika = $request->file("slikaKorisnikaAdminAdd");
@@ -58,7 +58,7 @@ class RegistracijaController extends Controller
 
         public_path("upload");
 
-
+        //dd($request);
         try
         {
             $slika->move(public_path("upload"),$slikaIme);
@@ -76,27 +76,27 @@ class RegistracijaController extends Controller
 
             $this->korisnikModel->InsertKorisnikAdmin();
 
-            $mail = new PHPMailer(true);
+           $mail = new PHPMailer(true);
             try
             {
-                $mail->SMTPDebug = 0;
-                //$mail->SMTPDebug = SMTP::DEBUG_SERVER;  
-                $mail->SMTPOptions = array('ssl' => array('verify_peer' => false, 'verify_peer_name' => false,'allow_self_signed' => true));
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com';  // backup
-                $mail->SMTPAuth = true;
-                $mail->Username = 'nemanjaranisavljevicsajt@gmail.com';
-                $mail->Password = 'nemanja@123456';
-                $mail->SMTPSecure = 'tls'; // tls enkripcija (moze i ssl)
-                $mail->Port = 587;
-                $mail->setFrom('nemanjaranisavljevicsajt@gmail.com', 'Tech-Blog registracija.');
-                $mail->addAddress($request->emailAdd);
-                // content
-                $mail->isHTML(true);
-                $mail->Subject = 'Kreiranje nalog!';
-                $mail->Body = 'Vasa sifra je '.$request->sifraAdd;
-                //PROMENJENO NA SERVERU POTANJA
-                $mail->send();
+                 $mail->SMTPDebug = 0;
+                 $mail->SMTPDebug = SMTP::DEBUG_SERVER;  
+                 $mail->SMTPOptions = array('ssl' => array('verify_peer' => false, 'verify_peer_name' => false,'allow_self_signed' => true));
+                 $mail->isSMTP();
+                 $mail->Host = 'smtp.gmail.com';  // backup
+                 $mail->SMTPAuth = true;
+                 $mail->Username = 'nemanjaranisavljevicsajt@gmail.com';
+                 $mail->Password = 'nemanja@123456';
+                 $mail->SMTPSecure = 'tls'; // tls enkripcija (moze i ssl)
+                 $mail->Port = 587;
+                 $mail->setFrom('nemanjaranisavljevicsajt@gmail.com', 'Tech-Blog registracija.');
+                 $mail->addAddress($request->emailAdd);
+                 // content
+                 $mail->isHTML(true);
+                 $mail->Subject = 'Kreiranje nalog!';
+                 $mail->Body = 'Vasa sifra je '.$request->sifraAdd;
+                 //PROMENJENO NA SERVERU POTANJA
+                 $mail->send();
 
             }catch(QueryException $e)
             {
@@ -219,7 +219,7 @@ class RegistracijaController extends Controller
                 $mail->Host = 'smtp.gmail.com';  // backup
                 $mail->SMTPAuth = true;
                 $mail->Username = 'nemanjaranisavljevicsajt@gmail.com';
-                $mail->Password = 'beka123456';
+                $mail->Password = 'nemanja@123456';
                 $mail->SMTPSecure = 'tls'; // tls enkripcija (moze i ssl)
                 $mail->Port = 587;
                 $mail->setFrom('nemanjaranisavljevicsajt@gmail.com', 'Tech-Blog registracija.');
