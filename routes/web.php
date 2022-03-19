@@ -52,3 +52,6 @@ Route::post('/admin-uloge/{id}','UlogeController@DeleteUloge');
 
 
 });
+
+
+Route::get('/vreme-prikaz/{datum}', 'Helpers\\DateClass@VremePrikaz');

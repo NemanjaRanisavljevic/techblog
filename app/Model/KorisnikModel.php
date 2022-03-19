@@ -24,11 +24,11 @@ class KorisnikModel extends Model
     {
         try{
             return \DB::table("korisnik as k")
-            ->join("pol as p","p.idPol","=","k.polId")
-            ->join("uloga as u","u.idUloga","=","k.ulogaId")
-            ->join("slika as s","s.idSlika","=","k.slikaId")
-            ->where("k.delete_on",null)
-            ->get();
+                ->join("pol as p","p.idPol","=","k.polId")
+                ->join("uloga as u","u.idUloga","=","k.ulogaId")
+                ->join("slika as s","s.idSlika","=","k.slikaId")
+                ->where("k.delete_on",null)
+                ->get();
         }catch(\Throwable $e)
         {
             \Log::info("Greska pri dohvatanju korisnika". $e->getMessage());
@@ -39,14 +39,14 @@ class KorisnikModel extends Model
     {
         try{
             return \DB::table("korisnik as k")
-            ->join("pol as p","p.idPol","=","k.polId")
-            ->join("uloga as u","u.idUloga","=","k.ulogaId")
-            ->join("slika as s","s.idSlika","=","k.slikaId")
-            ->where([
-                ["k.delete_on","=",null],
-                ["k.idKorisnik","=",$id]
-            ])
-            ->get();
+                ->join("pol as p","p.idPol","=","k.polId")
+                ->join("uloga as u","u.idUloga","=","k.ulogaId")
+                ->join("slika as s","s.idSlika","=","k.slikaId")
+                ->where([
+                    ["k.delete_on","=",null],
+                    ["k.idKorisnik","=",$id]
+                ])
+                ->get();
         }catch(\Throwable $e)
         {
             \Log::info("Greska pri dohvatanju korisnika". $e->getMessage());
